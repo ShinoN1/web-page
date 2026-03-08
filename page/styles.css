@@ -1,0 +1,799 @@
+/* --- VARIABLES DE TEMA (POR DEFECTO: CLARO) --- */
+/* =========================================
+   NUEVA PALETA DE COLORES: "VIBRANT TEAL"
+   ========================================= */
+
+   :root {
+    /* --- TEMA CLARO (Minimalista y Luminoso) --- */
+    
+    /* Fondos */
+    --bg-app: #f1f5f9;      /* Un gris azulado muy pálido, menos aburrido que el blanco */
+    --bg-panel: #ffffff;    /* Blanco puro para que los paneles resalten */
+    
+    /* Textos */
+    --text-main: #0f172a;   /* Azul marino casi negro, más elegante que el negro puro */
+    --text-muted: #64748b;  /* Un gris medio sofisticado para textos secundarios */
+    
+    /* Bordes y Separadores */
+    --border-color: #e2e8f0; /* Gris claro sutil */
+    
+    /* --- EL COLOR PRINCIPAL (Vibrante y Elegante) --- */
+    /* Usamos un Turquesa/Teal intenso en lugar del verde estándar */
+    --primary: #0d9488;      /* Teal vibrante */
+    --primary-hover: #0f766e; /* Un tono más profundo para el hover */
+    
+    /* Colores del Grid */
+    --header-bg: #f0fdfa;   /* Un tinte muy suave del color primario */
+    --cell-bg: #ffffff;
+    --time-bg: #f8fafc;     /* Gris muy claro para las horas */
+    
+    /* Barra Lateral y Acentos */
+    --nav-bg: #1e293b;      /* Un azul grisáceo oscuro y profundo para la barra lateral */
+    
+    /* Peligro / Basura */
+    --danger: #ef4444;      /* Rojo estándar, funciona bien */
+    --danger-bg: #fef2f2;   /* Fondo rojo muy pálido */
+}
+
+/* --- TEMA OSCURO (Mate Profundo y Sofisticado) --- */
+body.dark-mode {
+    /* Fondos */
+    --bg-app: #111827;      /* "Cool Gray 900" - Casi negro, muy profundo */
+    --bg-panel: #1f2937;    /* "Cool Gray 800" - Un tono más claro para elevar los paneles */
+    
+    /* Textos */
+    --text-main: #f1f5f9;   /* Blanco hueso */
+    --text-muted: #94a3b8;  /* Gris claro mate */
+    
+    /* Bordes */
+    --border-color: #334155; /* Gris azulado oscuro para bordes sutiles */
+    
+    /* --- COLOR PRINCIPAL EN OSCURO --- */
+    --primary: #2dd4bf;      /* Un turquesa más brillante y luminoso para que resalte en fondo oscuro */
+    --primary-hover: #14b8a6;
+    
+    /* Colores del Grid */
+    --header-bg: #134e4a;   /* Un teal muy oscuro y rico para las cabeceras */
+    --cell-bg: #1f2937;
+    --time-bg: #1f2937;
+    
+    /* Barra Lateral */
+    --nav-bg: #0f172a;      /* Casi negro absoluto para la barra lateral */
+    
+    /* Peligro */
+    --danger: #f87171;      /* Un rojo más coral y suave para modo oscuro */
+    --danger-bg: #450a0a;   /* Rojo oscuro profundo */
+}
+
+/* =================================================================
+   MODO CINNAMOROLL: EDICIÓN SUPREMA KAWAII (BASE ROSA)
+   ================================================================= */
+
+   body.cinnamoroll-mode {
+    /* --- PALETA DE COLORES TIERNA (ACTUALIZADA) --- */
+    --cinnamo-pink-pale: #fff0f5;   /* Lavanda rosácea muy pálida */
+    --cinnamo-pink-soft: #fce1e4;   /* Rosa pastel suave */
+    --cinnamo-pink-pop: #ffc4d6;    /* Rosa chicle */
+    --cinnamo-blue-sky: #b0e0e6;    /* Azul cielo */
+    
+    /* CAMBIO CLAVE: BLANCO CREMOSO, NO PURO */
+    --cinnamo-white: #fffdfc;       /* Blanco leche/crema suave */
+    
+    --cinnamo-brown: #8d6e63;       /* Marrón chocolate suave para texto */
+
+    /* Mapeo a las variables del sistema */
+    --bg-app: var(--cinnamo-pink-pale);
+    --bg-panel: var(--cinnamo-white);
+    --text-main: var(--cinnamo-brown);
+    --text-muted: #a88c7d;
+    --border-color: var(--cinnamo-pink-pop);
+    
+    /* El color principal de los botones y chips */
+    --primary: var(--cinnamo-pink-pop);
+    --primary-hover: #ffacc5;
+    
+    --nav-bg: var(--cinnamo-white);
+    
+    /* Grid */
+    --header-bg: var(--cinnamo-pink-soft);
+    --cell-bg: var(--cinnamo-white);
+    --time-bg: var(--cinnamo-pink-pale);
+    
+    /* Basura (Un rosa más intenso) */
+    --danger: #ff6b81;
+    --danger-bg: #fff0f1;
+}
+
+/* --- ESTILOS GLOBALES Y FONDO --- */
+body.cinnamoroll-mode {
+    font-family: 'Fredoka', sans-serif !important; /* Fuente súper redondita */
+    /* Fondo de patrón Vichy (cuadritos) rosa y blanco */
+    background-image: 
+        linear-gradient(45deg, var(--cinnamo-pink-soft) 25%, transparent 25%), 
+        linear-gradient(-45deg, var(--cinnamo-pink-soft) 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, var(--cinnamo-pink-soft) 75%), 
+        linear-gradient(-45deg, transparent 75%, var(--cinnamo-pink-soft) 75%);
+    background-size: 40px 40px;
+    background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+    
+    /* Cursor tierno (opcional, si el navegador lo soporta) */
+    cursor: url('https://cdn-icons-png.flaticon.com/32/8230/8230698.png'), auto;
+}
+
+/* --- IMAGEN GIGANTE DE CINNAMOROLL EN EL FONDO --- */
+/* Aparece en la esquina inferior derecha de la app */
+body.cinnamoroll-mode .content-area::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    right: -50px;
+    width: 400px;
+    height: 400px;
+    background-image: url('https://i.pinimg.com/originals/28/66/41/2866413e50784cb72663c2721028dd60.png'); /* Cinnamoroll volando */
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.2; /* Suave para que no moleste */
+    pointer-events: none; /* Para que no interfiera con los clicks */
+    z-index: 0;
+}
+
+/* --- BARRA DE NAVEGACIÓN LATERAL --- */
+body.cinnamoroll-mode .main-nav {
+    border-right: 4px dotted var(--cinnamo-pink-pop); /* Borde de puntitos */
+    box-shadow: 5px 0 15px rgba(255, 196, 214, 0.4);
+    z-index: 1;
+}
+body.cinnamoroll-mode .nav-btn { color: var(--cinnamo-pink-pop); }
+body.cinnamoroll-mode .nav-btn.active {
+    background: var(--cinnamo-pink-soft);
+    color: var(--cinnamo-brown);
+    border-radius: 50% 50% 20% 20%; /* Forma de cupcake */
+    border: 3px solid var(--cinnamo-white);
+    box-shadow: 0 4px 8px rgba(255, 182, 193, 0.5);
+}
+
+/* --- PANELES (Sidebar, Grid, Tasks) --- */
+body.cinnamoroll-mode .sidebar-palette,
+body.cinnamoroll-mode .schedule-grid-wrapper,
+body.cinnamoroll-mode .tasks-container {
+    border-radius: 35px; /* Súper redondos */
+    border: 4px solid var(--cinnamo-white);
+    /* Sombra doble rosa y azul */
+    box-shadow: 
+        0 0 0 4px var(--cinnamo-pink-pop),
+        8px 8px 0px var(--cinnamo-blue-sky);
+    position: relative;
+    z-index: 1;
+    background-clip: padding-box;
+}
+
+/* Decoración superior de la sidebar con imagen */
+body.cinnamoroll-mode .sidebar-palette::before {
+    content: '';
+    display: block;
+    height: 100px;
+    margin: -20px -20px 20px -20px;
+    background-image: url('https://i.pinimg.com/originals/07/7d/26/077d262395752da5d55d4513bc906763.png'); /* Cinnamoroll con amigos */
+    background-size: cover;
+    background-position: center;
+    border-radius: 30px 30px 0 0;
+    border-bottom: 4px dotted var(--cinnamo-pink-pop);
+}
+
+/* --- INPUTS Y BOTONES KAWAII --- */
+body.cinnamoroll-mode .add-subject-box,
+body.cinnamoroll-mode .input-group input {
+    border: 3px solid var(--cinnamo-pink-soft);
+    background: var(--cinnamo-white);
+    border-radius: 25px;
+    color: var(--cinnamo-brown);
+    font-weight: 600;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+}
+
+body.cinnamoroll-mode .add-btn, 
+body.cinnamoroll-mode .input-group button {
+    background: linear-gradient(to bottom, var(--cinnamo-pink-pop), #ff9eb5);
+    border: 2px solid white;
+    box-shadow: 0 4px 6px rgba(255, 170, 190, 0.4);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* --- CHIPS DE MATERIAS --- */
+body.cinnamoroll-mode .subject-chip {
+    border-radius: 20px;
+    border: 3px solid var(--cinnamo-white) !important;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.1) !important;
+    font-weight: 700;
+    color: var(--cinnamo-brown) !important;
+    /* Patrón de puntitos blancos sobre el color */
+    background-image: radial-gradient(rgba(255,255,255,0.5) 20%, transparent 20%);
+    background-size: 8px 8px;
+}
+
+/* Cuando están en el grid, que parezcan caramelos */
+body.cinnamoroll-mode .schedule-cell .subject-chip {
+    border-radius: 12px !important;
+    margin: 2px !important;
+    width: calc(100% - 4px) !important;
+    height: calc(100% - 4px) !important;
+}
+
+/* --- GRID HEADER (NUBES) --- */
+body.cinnamoroll-mode .day-header {
+    background: var(--cinnamo-white);
+    border: 3px solid var(--cinnamo-blue-sky);
+    border-radius: 50px;
+    color: var(--cinnamo-brown);
+    text-transform: uppercase;
+    position: relative;
+    overflow: visible;
+    margin-top: 10px; /* Espacio para la imagen */
+}
+/* Pequeño Cinnamoroll asomándose en cada día */
+body.cinnamoroll-mode .day-header::after {
+    content: '';
+    position: absolute;
+    top: -25px;
+    right: 5px;
+    width: 40px;
+    height: 30px;
+    background-image: url('https://pngimg.com/uploads/cinnamoroll/small/cinnamoroll_PNG34.png'); /* Cara de Cinnamoroll */
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 2;
+}
+
+/* --- BASURA KAWAII --- */
+body.cinnamoroll-mode .trash-zone {
+    background: #fff0f5;
+    border: 4px dotted #ff8fab;
+    color: #ff6b81;
+    border-radius: 30px;
+    position: relative;
+}
+body.cinnamoroll-mode .trash-zone i { display: none; } /* Oculta icono normal */
+body.cinnamoroll-mode .trash-zone::before {
+    content: '🍮'; /* Un flan o postre en vez de basura */
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 5px;
+}
+body.cinnamoroll-mode .trash-zone::after {
+    content: ' (Desaparecer)';
+    font-size: 0.8rem;
+}
+
+/* --- TAREAS --- */
+body.cinnamoroll-mode .tasks-header h2 {
+    text-align: center;
+}
+/* Decoración de título con estrellitas */
+body.cinnamoroll-mode .tasks-header h2::before,
+body.cinnamoroll-mode .tasks-header h2::after {
+    content: '✨';
+    margin: 0 10px;
+    color: var(--cinnamo-pink-pop);
+}
+
+body.cinnamoroll-mode .task-item {
+    border-bottom: 2px dashed var(--cinnamo-pink-soft);
+    background: #fffafc;
+    margin-bottom: 8px;
+    border-radius: 15px;
+}
+body.cinnamoroll-mode .task-item button {
+    color: var(--cinnamo-pink-pop) !important;
+    background: var(--cinnamo-pink-pale) !important;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+}
+
+/* =================================================================
+   DETALLES EXTRA KAWAII: NUBES Y DECORACIÓN
+   ================================================================= */
+
+/* --- 1. FONDO CON NUBES FLOTANTES ANIMADAS --- */
+body.cinnamoroll-mode::before {
+    content: '☁️        ☁️     ☁️';
+    position: fixed;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 4rem; /* Nubes grandes */
+    color: rgba(255, 255, 255, 0.6); /* Semitransparentes */
+    text-shadow: 0 0 20px #b0e0e6; /* Brillo azul */
+    pointer-events: none;
+    z-index: -1;
+    animation: floatClouds 20s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes floatClouds {
+    0% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(20px) translateX(20px); }
+    100% { transform: translateY(0) translateX(0); }
+}
+
+/* --- 2. DECORACIÓN DE LAZOS Y ESTRELLAS EN PANELES --- */
+
+/* Lazo en la esquina de la barra lateral */
+body.cinnamoroll-mode .sidebar-palette::after {
+    content: '🎀';
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    font-size: 2.5rem;
+    transform: rotate(-15deg);
+    z-index: 10;
+    filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.1));
+}
+
+/* Estrellas en el grid del horario */
+body.cinnamoroll-mode .schedule-grid-wrapper::after {
+    content: '✨';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: var(--cinnamo-pink-pop);
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.5; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
+
+/* =================================================================
+   DÍAS DE LA SEMANA: ZOOLÓGICO KAWAII ANIMADO
+   ================================================================= */
+
+/* 1. Base para TODOS los días (Verde Menta Súper Clarito) */
+body.cinnamoroll-mode .day-header {
+    background: #f0fdf4 !important;  /* Menta helada muy pálido */
+    border: 3px solid #86efac !important; /* Borde verde pastel suave */
+    color: #166534 !important; /* Texto verde bosque */
+    box-shadow: 0 4px 0 #bbf7d0 !important; /* Sombra 3D suave */
+    border-radius: 20px;
+    margin-top: 20px; /* Espacio para los animales */
+    overflow: visible !important; /* ¡Para que los animales se salgan del cuadro! */
+    position: relative;
+}
+
+/* 2. Configuración común para los animales */
+body.cinnamoroll-mode .day-header::after {
+    content: '';
+    position: absolute;
+    top: -35px; /* Se asoman por arriba */
+    right: -5px;
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 10;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1)); /* Sombrita para el animal */
+}
+
+/* --- PERSONALIZACIÓN POR DÍA --- */
+
+/* LUNES: SAPITO 🐸 (Salta) */
+body.cinnamoroll-mode .day-header:nth-of-type(1)::after {
+    background-image: url('https://img.icons8.com/Dusk_Wired/1200/cinnamoroll.jpg');
+    animation: jump 1.5s infinite ease-in-out;
+}
+
+/* MARTES: KOALA 🐨 (Se balancea de sueño) */
+body.cinnamoroll-mode .day-header:nth-of-type(2)::after {
+    background-image: url('https://www.pngall.com/wp-content/uploads/13/Cinnamoroll-PNG-Image-HD.png');
+    animation: sway 3s infinite ease-in-out;
+    top: -30px; /* El koala es más bajito */
+}
+
+/* MIÉRCOLES: CONEJITO 🐰 (Brinca rápido) */
+body.cinnamoroll-mode .day-header:nth-of-type(3)::after {
+    background-image: url('https://cdn-icons-png.flaticon.com/128/17517/17517835.png');
+    animation: hop 1s infinite alternate;
+}
+
+/* JUEVES: OSITO 🐻 (Se asoma curioso) */
+body.cinnamoroll-mode .day-header:nth-of-type(4)::after {
+    background-image: url('https://cdn-icons-png.flaticon.com/128/18118/18118747.png');
+    animation: peek 3s infinite;
+}
+
+/* VIERNES: POLLITO 🐥 (Aletea feliz porque es viernes) */
+body.cinnamoroll-mode .day-header:nth-of-type(5)::after {
+    background-image: url('https://cdn-icons-png.flaticon.com/128/4200/4200123.png');
+    animation: wiggle 0.5s infinite;
+}
+
+/* SÁBADO: GATITO 🐱 (Flota relajado) */
+body.cinnamoroll-mode .day-header:nth-of-type(6)::after {
+    background-image: url('https://cdn-icons-png.flaticon.com/128/4478/4478363.png');
+    animation: float 2s infinite ease-in-out;
+}
+
+/* DOMINGO: PERRITO 🐶 (Mueve la cabeza) */
+body.cinnamoroll-mode .day-header:nth-of-type(7)::after {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/3069/3069159.png');
+    animation: headBob 2s infinite ease-in-out;
+}
+
+/* --- ANIMACIONES --- */
+
+@keyframes jump {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes sway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+@keyframes hop {
+    0% { transform: translateY(0) scale(1, 1); }
+    100% { transform: translateY(-5px) scale(1.05, 0.95); }
+}
+
+@keyframes peek {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); } /* Se esconde un poquito */
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+@keyframes headBob {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+/* 3. Decoración Extra: Nenúfar (Hoja de loto) en la esquina opuesta */
+body.cinnamoroll-mode .day-header::before {
+    content: '🍀'; /* Trébol o Nenúfar */
+    position: absolute;
+    bottom: 2px;
+    left: 5px;
+    font-size: 1rem;
+    opacity: 0.6;
+    color: #047857;
+}
+
+/* Animación del sapito saltando suavemente */
+@keyframes frogJump {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-3px) rotate(5deg); }
+}
+
+/* --- 3. INPUTS MÁS TIERNOS --- */
+body.cinnamoroll-mode input {
+    background-color: #fffaf0 !important; /* Blanco floral */
+    border: 2px dashed var(--cinnamo-blue-sky) !important; /* Borde punteado azul */
+}
+
+/* --- 4. CELDAS DEL HORARIO DECORADAS --- */
+/* Cuando pasas el mouse por una celda vacía, aparece un corazoncito */
+body.cinnamoroll-mode .schedule-cell:not(:has(.subject-chip)):hover::after {
+    content: '💙';
+    font-size: 1.2rem;
+    opacity: 0.3;
+}
+
+/* --- ESTILOS GLOBALES --- */
+html, body {
+    margin: 0; padding: 0; width: 100%; height: 100vh; overflow: hidden;
+    font-family: 'Inter', 'Segoe UI', sans-serif; /* Fuente moderna */
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Login */
+.login-wrapper {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--nav-bg); z-index: 1000;
+    display: flex; justify-content: center; align-items: center;
+}
+.login-box {
+    background: var(--bg-panel); padding: 2.5rem; border-radius: 20px;
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); width: 320px;
+}
+.hidden { display: none !important; }
+
+/* Layout App */
+.app-layout { display: flex; height: 100vh; width: 100vw; }
+
+/* Navegación */
+.main-nav {
+    width: 80px; background: var(--nav-bg);
+    display: flex; flex-direction: column; justify-content: space-between;
+    align-items: center; padding: 30px 0; flex-shrink: 0;
+}
+.nav-btn {
+    background: transparent; border: none; color: #94a3b8;;
+    font-size: 1.4rem; padding: 15px; border-radius: 12px;
+    cursor: pointer; transition: 0.2s; margin-bottom: 10px;
+}
+.nav-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+.nav-btn.active { color: white; background: var(--primary); }
+
+/* Contenido */
+.content-area { flex-grow: 1; position: relative; background: var(--bg-app); overflow: hidden; }
+.view-section { width: 100%; height: 100%; padding: 20px; box-sizing: border-box; }
+.hidden-view { display: none; }
+.active-view { display: block; animation: fadeUp 0.3s ease-out; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- SECCIÓN HORARIO --- */
+.schedule-wrapper { display: flex; gap: 20px; height: 100%; }
+
+/* Sidebar Materias (Izquierda) */
+.sidebar-palette {
+    width: 260px; background: var(--bg-panel);
+    border-radius: 20px; padding: 20px;
+    display: flex; flex-direction: column;
+    border: 1px solid var(--border-color);
+    /* Reemplaza los box-shadow antiguos por este estilo: */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+.sidebar-palette h3 { margin-top: 0; color: var(--text-main); font-weight: 600; }
+
+/* --- CONFIGURACIÓN DE DÍAS (SIDEBAR) --- */
+.config-days-box {
+    margin: 20px 0;
+    padding: 15px;
+    background: var(--bg-app);
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+}
+.config-days-box h4 {
+    margin: 0 0 10px 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.day-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+.day-toggle input[type="checkbox"] {
+    accent-color: var(--primary); /* Pone el checkbox del color de tu tema */
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* --- INPUTS REDONDEADOS Y PROFESIONALES --- */
+.add-subject-box {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--bg-app); padding: 8px;
+    border-radius: 50px; /* Borde completamente redondo */
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+.add-subject-box input[type="text"] {
+    border: none; background: transparent; flex: 1;
+    padding: 8px 10px; outline: none; color: var(--text-main);
+    font-size: 0.9rem;
+}
+.color-picker-wrapper {
+    width: 30px; height: 30px; border-radius: 50%; overflow: hidden;
+    border: 2px solid var(--border-color); cursor: pointer;
+}
+.color-picker-wrapper input[type="color"] {
+    width: 150%; height: 150%; margin: -25%; cursor: pointer; border: none; padding: 0;
+}
+.add-btn {
+    background: var(--primary); color: white; border: none;
+    width: 36px; height: 36px; border-radius: 50%;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s;
+}
+.add-btn:hover { transform: scale(1.1); background: var(--primary-hover); }
+
+/* Lista de materias */
+.draggable-pool { flex-grow: 1; overflow-y: auto; padding: 5px; margin-bottom: 10px; }
+
+/* Chips de Materias */
+.subject-chip {
+    padding: 10px 15px; border-radius: 12px; /* Redondeado suave */
+    font-size: 0.85rem; font-weight: 600; color: #1f2937;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 8px; cursor: grab; text-align: center;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+.subject-chip:active { cursor: grabbing; transform: scale(0.98); }
+
+/* Basurero */
+.trash-zone {
+    padding: 20px; border-radius: 15px;
+    border: 2px dashed var(--danger);
+    background: var(--danger-bg); color: var(--danger);
+    text-align: center; font-weight: 600; font-size: 0.9rem;
+    transition: 0.2s;
+}
+.trash-zone.drag-over { transform: scale(1.02); opacity: 0.8; }
+
+/* --- GRID HORARIO EDITABLE --- */
+.schedule-grid-wrapper {
+    flex-grow: 1; background: var(--bg-panel);
+    border-radius: 20px; padding: 20px;
+    border: 1px solid var(--border-color);
+    display: flex; flex-direction: column; overflow: hidden;
+    /* Reemplaza los box-shadow antiguos por este estilo: */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.grid-header-row {
+    display: grid; grid-template-columns: 90px repeat(5, 1fr);
+    gap: 4px; margin-bottom: 4px; text-align: center;
+    font-weight: 600; color: var(--text-muted);
+}
+.day-header { background: var(--header-bg); padding: 12px; border-radius: 10px; color: var(--text-main); }
+.time-header-corner { padding: 12px; font-size: 0.8rem; }
+
+.main-grid {
+    display: grid; grid-template-columns: 90px repeat(5, 1fr);
+    gap: 4px; flex-grow: 1; overflow-y: auto;
+}
+
+/* Celdas de Hora Editable */
+.time-slot-label {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: bold; color: var(--text-muted);
+    background: var(--time-bg); border-radius: 10px;
+    text-align: center; padding: 5px; cursor: text;
+    border: 1px solid transparent; transition: border 0.2s;
+}
+.time-slot-label:hover { border: 1px solid var(--border-color); }
+.time-slot-label:focus {
+    background: var(--bg-panel); border: 2px solid var(--primary);
+    outline: none; color: var(--text-main);
+}
+
+/* Celdas del Horario */
+/* En styles.css */
+
+.schedule-cell {
+    background: var(--cell-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    min-height: 70px;
+    
+    /* ESTO ES LO IMPORTANTE: */
+    position: relative; /* Referencia para el hijo */
+    padding: 0 !important; /* Cero espacio interno a la fuerza */
+    overflow: hidden; /* Recorta lo que sobre (esquinas redondas) */
+    z-index: 1;
+}
+
+/* Cuando la materia está DENTRO del horario */
+.schedule-cell .subject-chip {
+    position: absolute; /* Se libera del flujo normal */
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important; /* Cuadrado perfecto (el padre recorta las esquinas) */
+    box-shadow: none;
+    
+    /* Centrado del texto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+    /* Estética del texto */
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.7);
+    padding: 5px;
+    box-sizing: border-box; /* Para que el padding no rompa el ancho */
+}
+
+.schedule-cell.drag-over { background: rgba(16, 185, 129, 0.1); border: 2px dashed var(--primary); }
+
+/* --- TAREAS --- */
+.tasks-container {
+    max-width: 900px; margin: 0 auto; background: var(--bg-panel);
+    border-radius: 20px; padding: 40px; height: 90%;
+    /* Reemplaza los box-shadow antiguos por este estilo: */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    display: flex; flex-direction: column;
+}
+.tasks-header { border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px; }
+.tasks-header h2 { color: var(--text-main); margin-top: 0; }
+.input-group { display: flex; gap: 10px; }
+.input-group input { 
+    padding: 12px 15px; border-radius: 12px; border: 1px solid var(--border-color);
+    background: var(--bg-app); color: var(--text-main); flex: 1; outline: none;
+}
+.input-group button {
+    padding: 0 25px; background: var(--primary); color: white;
+    border: none; border-radius: 12px; font-weight: 600; cursor: pointer;
+}
+.task-item {
+    display: flex; justify-content: space-between; padding: 15px;
+    border-bottom: 1px solid var(--border-color); color: var(--text-main);
+}
+.config-days-box {
+    margin: 20px 0;
+    padding: 15px;
+    background: var(--bg-app); /* Se adapta al tema oscuro/claro */
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+.day-toggle {
+    display: flex;
+    justify-content: space-between; /* Texto a la izq, botón a la der */
+    align-items: center;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    user-select: none;
+}
+.day-toggle input { display: none; 
+}
+.toggle-slider {
+    width: 40px;
+    height: 22px;
+    background-color: #e5e7eb; /* Gris apagado */
+    border-radius: 20px;
+    position: relative;
+    transition: background-color 0.3s;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+.toggle-slider::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s, background-color 0.3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.day-toggle input:checked + .toggle-slider {
+    background-color: var(--primary); /* Se pone verde (o el color del tema) */
+}
+
+.day-toggle input:checked + .toggle-slider::after {
+    transform: translateX(18px); /* Se mueve a la derecha */
+}
+
+/* CORRECCIÓN DE RECUADRO ROJO RANDOM */
+/* Aseguramos que solo el basurero real tenga borde rojo */
+.trash-zone {
+    /* ... propiedades anteriores ... */
+    margin-top: auto; /* Empuja al fondo */
+    min-height: 50px; /* Asegura que tenga altura */
+}
+
+/* Si tenías un div vacío causando problemas, esto lo oculta si no es el basurero */
+div:empty:not(.trash-zone):not(.draggable-pool):not(.schedule-cell) {
+    display: none;
+}
