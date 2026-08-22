@@ -3,48 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organizador Pro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Organizador Pro - Sakura Edition</title>
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+    <!-- PANTALLA DE LOGIN -->
     <div id="login-container" class="login-wrapper">
         <div class="login-box">
-            <h2><i class="fas fa-user-graduate"></i> Student Plan</h2>
+            <h2><i class="fas fa-heart"></i> Hola de nuevo</h2>
             <form id="login-form">
                 <input type="text" id="username" placeholder="Usuario" required>
                 <input type="password" id="password" placeholder="Contraseña" required>
-                <button type="submit">Entrar</button>
+                <button type="submit">Entrar al Organizador</button>
             </form>
             <p id="login-error" class="error-msg"></p>
         </div>
     </div>
 
+    <!-- CONTENEDOR PRINCIPAL DE LA APP -->
     <div id="app-container" class="app-layout hidden">
         
-        <nav class="main-nav">
-            <div class="nav-top">
-                <button class="nav-btn active" onclick="switchView('schedule')" title="Horario">
-                    <i class="fas fa-calendar-alt"></i>
-                </button>
-                <button class="nav-btn" onclick="switchView('tasks')" title="Tareas">
-                    <i class="fas fa-tasks"></i>
-                </button>
-            </div>
-            <div class="nav-bottom">
-                <button class="nav-btn theme-toggle" id="theme-btn" onclick="toggleTheme()" title="Modo Oscuro">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="nav-btn logout" id="logout-btn" title="Salir">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </div>
-        </nav>
+        <!-- BARRA LATERAL IZQUIERDA COMPLETA -->
+<nav class="main-nav">
+    <!-- Encabezado con Logo y Título -->
+    <div class="nav-brand">
+        <span class="brand-ribbon">💖</span>
+        <h1 class="brand-title">focus with you</h1>
+        <p class="brand-subtitle">enfócate. respira. logra.</p>
+    </div>
 
+    <!-- Lista de Menú con Texto -->
+    <div class="nav-menu">
+        <button class="nav-btn active" onclick="switchView(event, 'clock')">
+            <i class="fas fa-home"></i>
+            <span>Inicio</span>
+        </button>
+        <button class="nav-btn" onclick="switchView(event, 'schedule')">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Horario</span>
+        </button>
+        <button class="nav-btn" onclick="switchView(event, 'tasks')">
+            <i class="fas fa-tasks"></i>
+            <span>Tareas</span>
+        </button>
+    </div>
+
+    <!-- Sección Inferior (Frase + Ilustración de conejito) -->
+    <div class="nav-footer">
+        <div class="quote-pill">
+            <span>pequeños pasos</span>
+            <strong>grandes cambios</strong> 🌸
+        </div>
+        
+        <!-- Ilustración de conejito kawaii (vía SVG/Image) -->
+        <div class="bunny-illustration">
+            <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="Bunny Cute">
+        </div>
+
+        <button class="logout-btn-text" id="logout-btn" title="Cerrar sesión">
+            <i class="fas fa-sign-out-alt"></i> Salir
+        </button>
+    </div>
+</nav>
+
+        <!-- ÁREA DE CONTENIDO (PANTALLAS) -->
         <div class="content-area">
             
+            <!-- VISTA 1: HORARIO -->
             <section id="view-schedule" class="view-section active-view">
                 <div class="schedule-wrapper">
                     
@@ -53,12 +86,18 @@
                         
                         <div class="add-subject-box">
                             <input type="text" id="new-subject-name" placeholder="Nueva materia...">
-                            <div class="color-picker-wrapper">
-                                <input type="color" id="subject-color" value="#5eead4" title="Elige color">
+                            
+                            <!-- Selector de color interactivo / Ruleta de color -->
+                            <div class="color-picker-wrapper" title="Elige un color">
+                                <input type="color" id="new-subject-color" value="#E6868E">
                             </div>
-                            <button onclick="createDraggableSubject()" class="add-btn"><i class="fas fa-plus"></i></button>
+                            
+                            <button type="button" onclick="createDraggableSubject()" class="add-btn">
+                                <i class="fas fa-plus"></i>
+                            </button>
                         </div>
                         
+                        <!-- Contenedor de materias arrastrables -->
                         <div id="draggable-container" class="draggable-pool"></div>
 
                         <div class="config-days-box">
@@ -75,32 +114,177 @@
                             </label>
                         </div>
 
-                        <div class="trash-zone" ondrop="deleteDroppedItem(event)" ondragover="allowDrop(event)">
-                            <i class="fas fa-trash"></i> Arrastra aquí para eliminar
+                        <div id="trash" class="trash-zone" ondrop="deleteDroppedItem(event)" ondragover="allowDrop(event)">
+                            <i class="fas fa-trash-alt"></i> Arrastra aquí para eliminar
                         </div>
                     </aside>
 
                     <div class="schedule-grid-wrapper">
-                        <div class="grid-header-row">
-                            </div>
-                        <div id="main-grid" class="main-grid"></div>
+                        <div id="grid-header" class="grid-header-row">
+                            <div class="time-header-corner">Horas</div>
+                            <div class="day-header">LUNES</div>
+                            <div class="day-header">MARTES</div>
+                            <div class="day-header">MIÉRCOLES</div>
+                            <div class="day-header">JUEVES</div>
+                            <div class="day-header">VIERNES</div>
+                            <div class="day-header saturday-col hidden">SÁBADO</div>
+                            <div class="day-header sunday-col hidden">DOMINGO</div>
+                        </div>
+                        <div id="main-grid" class="main-grid">
+                            <!-- Las celdas se generarán por JavaScript -->
+                        </div>
                     </div>
                 </div>
             </section>
 
+            <!-- VISTA 2: TAREAS -->
             <section id="view-tasks" class="view-section hidden-view">
                 <div class="tasks-container">
                     <header class="tasks-header">
-                        <h2>Mis Tareas</h2>
+                        <h2>Mis Tareas Pendientes</h2>
                         <div class="input-group">
-                            <input type="text" id="task-desc" placeholder="Descripción...">
-                            <input type="datetime-local" id="task-deadline">
-                            <button onclick="addTask()">Agregar</button>
+                            <input type="text" id="task-desc" placeholder="¿Qué necesitas hacer?">
+                            <input type="date" id="task-deadline">
+                            <button type="button" onclick="addTask()">Agregar</button>
                         </div>
                     </header>
                     <ul id="task-list" class="task-list"></ul>
                 </div>
             </section>
+
+            <!-- VISTA 3: FOCUS DASHBOARD (ESTILO REFERENCIA) -->
+<section id="view-clock" class="view-section hidden-view">
+    <div class="dashboard-header">
+        <h2>¡Hola! <span class="heart-icon">♥</span></h2>
+        <p>♡</p>
+    </div>
+
+    <div class="dashboard-grid">
+        
+        <!-- 1. TEMPORIZADOR Y CRONÓMETRO -->
+<div class="card-custom pomodoro-card">
+    <div class="card-title"><i class="fas fa-seedling"></i> Tiempo & Enfoque</div>
+    
+    <div class="pomo-tabs">
+        <button class="pomo-tab active" onclick="setTimerMode('pomodoro', 25, this)">Pomodoro</button>
+        <button class="pomo-tab" onclick="setTimerMode('short', 5, this)">Descanso</button>
+        <button class="pomo-tab" onclick="setTimerMode('stopwatch', 0, this)">Cronómetro</button>
+    </div>
+    
+    <div class="pomo-circle">
+        <span id="timer-display">25:00</span>
+        <small id="timer-sublabel" class="timer-subtext"></small>
+    </div>
+    
+    <div class="pomo-controls">
+        <button id="start-timer-btn" onclick="toggleTimer()"><i class="fas fa-play"></i> Iniciar</button>
+        <button class="icon-btn" onclick="resetTimer()" title="Reiniciar"><i class="fas fa-redo-alt"></i></button>
+    </div>
+</div>
+
+<!-- 2. RELOJ SHINY & ANIMADO -->
+<div class="card-custom clock-card-styled">
+    <div class="card-title"><i class="fas fa-sparkles"></i> Hora Actual</div>
+    
+    <div class="glow-clock-wrapper">
+        <div class="clock-ring"></div>
+        <div class="analog-clock-fancy">
+            <div class="clock-face">
+                <span class="number n12">12</span>
+                <span class="number n3">3</span>
+                <span class="number n6">6</span>
+                <span class="number n9">9</span>
+                
+                <div class="hand hour" id="hour-hand"></div>
+                <div class="hand minute" id="min-hand"></div>
+                <div class="hand second" id="sec-hand"></div>
+                <div class="center-gem">✨</div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="digital-clock" class="digital-badge">10:24:36 AM</div>
+</div>
+<!-- 3. FRASE Y LISTA DE OBJETIVOS -->
+        <div class="right-column-stack">
+            <div class="card-custom quote-card">
+                <p class="quote-text">"Si lees esto,<br>te amo mucho."</p>
+                <span class="quote-leaf">🌿</span>
+            </div>
+            
+            <div class="card-custom goals-card">
+                <h4>Hoy vas a lograr:</h4>
+                <ul class="mini-goals">
+                    <li><label><input type="checkbox" checked> <span>Estudiar 3 horas</span></label></li>
+                    <li><label><input type="checkbox" checked> <span>Leer 20 páginas</span></label></li>
+                    <li><label><input type="checkbox"> <span>Hacer ejercicio</span></label></li>
+                    <li><label><input type="checkbox"> <span>Repasar apuntes</span></label></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4. REPRODUCTOR DE MÚSICA ÚNICO Y CORREGIDO -->
+        <div class="card-custom music-player-wide">
+            <div class="music-left">
+                <div class="music-title-bar">
+                    <i class="fas fa-music"></i> <strong>Música para concentrarte</strong>
+                    <span class="sub-text">URL Personalizada / Radio</span>
+                </div>
+
+                <!-- 🔍 BARRA PARA AGREGAR MÚSICA POR URL -->
+                <div class="url-input-container">
+                    <input type="text" id="song-url-input" placeholder="Pega aquí la URL de audio o stream (MP3, AAC)...">
+                    <button onclick="loadCustomUrl()"><i class="fas fa-plus"></i> Cargar</button>
+                </div>
+
+                <!-- REPRODUCTOR ÚNICO -->
+                <div class="player-main-content">
+                    <div class="album-art">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop" alt="Lofi Room" id="album-cover-img">
+                    </div>
+                    <div class="player-controls-area">
+                        <span class="status-badge" id="player-status-badge">Listo para reproducir</span>
+                        <h3 id="player-title">lofi hip hop radio</h3>
+                        <p id="player-subtitle">beats to relax / study to</p>
+                        <small id="player-artist">Lofi Girl <i class="fas fa-check-circle"></i></small>
+                        
+                        <div class="playback-buttons">
+                            <button class="track-btn"><i class="fas fa-step-backward"></i></button>
+                            <button class="play-main-btn" id="play-music-btn" onclick="toggleMusic()"><i class="fas fa-play"></i></button>
+                            <button class="track-btn"><i class="fas fa-step-forward"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista lateral de sugerencias -->
+            <div class="music-suggestions">
+                <h4>Sugerencias rápidas</h4>
+                <ul>
+                    <li onclick="changeTrack('https://stream.zeno.fm/f3wvbbqmdg8uv', 'lofi hip hop radio', 'Lofi Girl')" style="cursor:pointer;">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=100">
+                        <div><strong>lofi hip hop radio</strong><p>Lofi Girl</p></div>
+                        <i class="fas fa-chart-bar signal-icon"></i>
+                    </li>
+                    <li onclick="changeTrack('https://stream.zeno.fm/330evyd4008uv', 'cozy lofi beats', 'ChilledCow')" style="cursor:pointer;">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=100">
+                        <div><strong>cozy lofi beats</strong><p>ChilledCow</p></div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Audio único -->
+            <audio id="lofi-audio" src="https://stream.zeno.fm/f3wvbbqmdg8uv" loop></audio>
+        </div>
+
+            <!-- Lista lateral de sugerencias -->
+         
+            <!-- Audio oculto que se reproduce -->
+            <audio id="lofi-audio" src="https://stream.zeno.fm/f3wvbbqmdg8uv" loop></audio>
+        </div>
+
+    </div>
+</section>
 
         </div>
     </div>
