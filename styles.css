@@ -1,799 +1,1172 @@
-/* --- VARIABLES DE TEMA (POR DEFECTO: CLARO) --- */
-/* =========================================
-   NUEVA PALETA DE COLORES: "VIBRANT TEAL"
-   ========================================= */
-
-   :root {
-    /* --- TEMA CLARO (Minimalista y Luminoso) --- */
-    
-    /* Fondos */
-    --bg-app: #f1f5f9;      /* Un gris azulado muy pálido, menos aburrido que el blanco */
-    --bg-panel: #ffffff;    /* Blanco puro para que los paneles resalten */
-    
-    /* Textos */
-    --text-main: #0f172a;   /* Azul marino casi negro, más elegante que el negro puro */
-    --text-muted: #64748b;  /* Un gris medio sofisticado para textos secundarios */
-    
-    /* Bordes y Separadores */
-    --border-color: #e2e8f0; /* Gris claro sutil */
-    
-    /* --- EL COLOR PRINCIPAL (Vibrante y Elegante) --- */
-    /* Usamos un Turquesa/Teal intenso en lugar del verde estándar */
-    --primary: #0d9488;      /* Teal vibrante */
-    --primary-hover: #0f766e; /* Un tono más profundo para el hover */
-    
-    /* Colores del Grid */
-    --header-bg: #f0fdfa;   /* Un tinte muy suave del color primario */
-    --cell-bg: #ffffff;
-    --time-bg: #f8fafc;     /* Gris muy claro para las horas */
-    
-    /* Barra Lateral y Acentos */
-    --nav-bg: #1e293b;      /* Un azul grisáceo oscuro y profundo para la barra lateral */
-    
-    /* Peligro / Basura */
-    --danger: #ef4444;      /* Rojo estándar, funciona bien */
-    --danger-bg: #fef2f2;   /* Fondo rojo muy pálido */
-}
-
-/* --- TEMA OSCURO (Mate Profundo y Sofisticado) --- */
-body.dark-mode {
-    /* Fondos */
-    --bg-app: #111827;      /* "Cool Gray 900" - Casi negro, muy profundo */
-    --bg-panel: #1f2937;    /* "Cool Gray 800" - Un tono más claro para elevar los paneles */
-    
-    /* Textos */
-    --text-main: #f1f5f9;   /* Blanco hueso */
-    --text-muted: #94a3b8;  /* Gris claro mate */
-    
-    /* Bordes */
-    --border-color: #334155; /* Gris azulado oscuro para bordes sutiles */
-    
-    /* --- COLOR PRINCIPAL EN OSCURO --- */
-    --primary: #2dd4bf;      /* Un turquesa más brillante y luminoso para que resalte en fondo oscuro */
-    --primary-hover: #14b8a6;
-    
-    /* Colores del Grid */
-    --header-bg: #134e4a;   /* Un teal muy oscuro y rico para las cabeceras */
-    --cell-bg: #1f2937;
-    --time-bg: #1f2937;
-    
-    /* Barra Lateral */
-    --nav-bg: #0f172a;      /* Casi negro absoluto para la barra lateral */
-    
-    /* Peligro */
-    --danger: #f87171;      /* Un rojo más coral y suave para modo oscuro */
-    --danger-bg: #450a0a;   /* Rojo oscuro profundo */
-}
-
 /* =================================================================
-   MODO CINNAMOROLL: EDICIÓN SUPREMA KAWAII (BASE ROSA)
+   PALETA SAKURA SOFT (Inspirada en tu referencia visual)
    ================================================================= */
+:root {
+    /* Colores Hex de la Paleta */
+    --sakura-bg: #e3a8d2;         /* Gris/Crema muy claro de fondo */
+    --sakura-card: #b37799;       /* Blanco puro para tarjetas */
+    --sakura-pink-light: #EABFBD; /* Rosa pastel suave */
+    --sakura-pink-main: #E6868E;  /* Rosa vibrante para botones/acentos */
+    --sakura-sage-light: #AFA975; /* Verde salvia medio */
+    --sakura-sage-dark: #7d5f65;  /* Verde salvia oscuro para textos y bordes */
 
-   body.cinnamoroll-mode {
-    /* --- PALETA DE COLORES TIERNA (ACTUALIZADA) --- */
-    --cinnamo-pink-pale: #fff0f5;   /* Lavanda rosácea muy pálida */
-    --cinnamo-pink-soft: #fce1e4;   /* Rosa pastel suave */
-    --cinnamo-pink-pop: #ffc4d6;    /* Rosa chicle */
-    --cinnamo-blue-sky: #b0e0e6;    /* Azul cielo */
+    /* Mapeo de variables generales */
+    --bg-app: var(--sakura-bg);
+    --bg-panel: var(--sakura-card);
+    --text-main: var(--sakura-sage-dark);
+    --text-muted: #9A926F;
+    --border-color: rgba(132, 123, 84, 0.2);
     
-    /* CAMBIO CLAVE: BLANCO CREMOSO, NO PURO */
-    --cinnamo-white: #fffdfc;       /* Blanco leche/crema suave */
+    --primary: var(--sakura-pink-main);
+    --primary-hover: #d8737c;
+    --nav-bg: var(--sakura-card);
     
-    --cinnamo-brown: #8d6e63;       /* Marrón chocolate suave para texto */
-
-    /* Mapeo a las variables del sistema */
-    --bg-app: var(--cinnamo-pink-pale);
-    --bg-panel: var(--cinnamo-white);
-    --text-main: var(--cinnamo-brown);
-    --text-muted: #a88c7d;
-    --border-color: var(--cinnamo-pink-pop);
+    --header-bg: var(--sakura-pink-light);
+    --cell-bg: rgba(255, 255, 255, 0.8);
+    --time-bg: #F5EAE8;
     
-    /* El color principal de los botones y chips */
-    --primary: var(--cinnamo-pink-pop);
-    --primary-hover: #ffacc5;
-    
-    --nav-bg: var(--cinnamo-white);
-    
-    /* Grid */
-    --header-bg: var(--cinnamo-pink-soft);
-    --cell-bg: var(--cinnamo-white);
-    --time-bg: var(--cinnamo-pink-pale);
-    
-    /* Basura (Un rosa más intenso) */
-    --danger: #ff6b81;
-    --danger-bg: #fff0f1;
+    --danger: #e56b6f;
+    --danger-bg: #fdf0f0;
 }
 
-/* --- ESTILOS GLOBALES Y FONDO --- */
-body.cinnamoroll-mode {
-    font-family: 'Fredoka', sans-serif !important; /* Fuente súper redondita */
-    /* Fondo de patrón Vichy (cuadritos) rosa y blanco */
-    background-image: 
-        linear-gradient(45deg, var(--cinnamo-pink-soft) 25%, transparent 25%), 
-        linear-gradient(-45deg, var(--cinnamo-pink-soft) 25%, transparent 25%), 
-        linear-gradient(45deg, transparent 75%, var(--cinnamo-pink-soft) 75%), 
-        linear-gradient(-45deg, transparent 75%, var(--cinnamo-pink-soft) 75%);
-    background-size: 40px 40px;
-    background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
-    
-    /* Cursor tierno (opcional, si el navegador lo soporta) */
-    cursor: url('https://cdn-icons-png.flaticon.com/32/8230/8230698.png'), auto;
-}
-
-/* --- IMAGEN GIGANTE DE CINNAMOROLL EN EL FONDO --- */
-/* Aparece en la esquina inferior derecha de la app */
-body.cinnamoroll-mode .content-area::after {
-    content: '';
-    position: absolute;
-    bottom: 0px;
-    right: -50px;
-    width: 400px;
-    height: 400px;
-    background-image: url('https://i.pinimg.com/originals/28/66/41/2866413e50784cb72663c2721028dd60.png'); /* Cinnamoroll volando */
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.2; /* Suave para que no moleste */
-    pointer-events: none; /* Para que no interfiera con los clicks */
-    z-index: 0;
-}
-
-/* --- BARRA DE NAVEGACIÓN LATERAL --- */
-body.cinnamoroll-mode .main-nav {
-    border-right: 4px dotted var(--cinnamo-pink-pop); /* Borde de puntitos */
-    box-shadow: 5px 0 15px rgba(255, 196, 214, 0.4);
-    z-index: 1;
-}
-body.cinnamoroll-mode .nav-btn { color: var(--cinnamo-pink-pop); }
-body.cinnamoroll-mode .nav-btn.active {
-    background: var(--cinnamo-pink-soft);
-    color: var(--cinnamo-brown);
-    border-radius: 50% 50% 20% 20%; /* Forma de cupcake */
-    border: 3px solid var(--cinnamo-white);
-    box-shadow: 0 4px 8px rgba(255, 182, 193, 0.5);
-}
-
-/* --- PANELES (Sidebar, Grid, Tasks) --- */
-body.cinnamoroll-mode .sidebar-palette,
-body.cinnamoroll-mode .schedule-grid-wrapper,
-body.cinnamoroll-mode .tasks-container {
-    border-radius: 35px; /* Súper redondos */
-    border: 4px solid var(--cinnamo-white);
-    /* Sombra doble rosa y azul */
-    box-shadow: 
-        0 0 0 4px var(--cinnamo-pink-pop),
-        8px 8px 0px var(--cinnamo-blue-sky);
-    position: relative;
-    z-index: 1;
-    background-clip: padding-box;
-}
-
-/* Decoración superior de la sidebar con imagen */
-body.cinnamoroll-mode .sidebar-palette::before {
-    content: '';
-    display: block;
-    height: 100px;
-    margin: -20px -20px 20px -20px;
-    background-image: url('https://i.pinimg.com/originals/07/7d/26/077d262395752da5d55d4513bc906763.png'); /* Cinnamoroll con amigos */
-    background-size: cover;
-    background-position: center;
-    border-radius: 30px 30px 0 0;
-    border-bottom: 4px dotted var(--cinnamo-pink-pop);
-}
-
-/* --- INPUTS Y BOTONES KAWAII --- */
-body.cinnamoroll-mode .add-subject-box,
-body.cinnamoroll-mode .input-group input {
-    border: 3px solid var(--cinnamo-pink-soft);
-    background: var(--cinnamo-white);
-    border-radius: 25px;
-    color: var(--cinnamo-brown);
-    font-weight: 600;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
-}
-
-body.cinnamoroll-mode .add-btn, 
-body.cinnamoroll-mode .input-group button {
-    background: linear-gradient(to bottom, var(--cinnamo-pink-pop), #ff9eb5);
-    border: 2px solid white;
-    box-shadow: 0 4px 6px rgba(255, 170, 190, 0.4);
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-/* --- CHIPS DE MATERIAS --- */
-body.cinnamoroll-mode .subject-chip {
-    border-radius: 20px;
-    border: 3px solid var(--cinnamo-white) !important;
-    box-shadow: 2px 2px 0px rgba(0,0,0,0.1) !important;
-    font-weight: 700;
-    color: var(--cinnamo-brown) !important;
-    /* Patrón de puntitos blancos sobre el color */
-    background-image: radial-gradient(rgba(255,255,255,0.5) 20%, transparent 20%);
-    background-size: 8px 8px;
-}
-
-/* Cuando están en el grid, que parezcan caramelos */
-body.cinnamoroll-mode .schedule-cell .subject-chip {
-    border-radius: 12px !important;
-    margin: 2px !important;
-    width: calc(100% - 4px) !important;
-    height: calc(100% - 4px) !important;
-}
-
-/* --- GRID HEADER (NUBES) --- */
-body.cinnamoroll-mode .day-header {
-    background: var(--cinnamo-white);
-    border: 3px solid var(--cinnamo-blue-sky);
-    border-radius: 50px;
-    color: var(--cinnamo-brown);
-    text-transform: uppercase;
-    position: relative;
-    overflow: visible;
-    margin-top: 10px; /* Espacio para la imagen */
-}
-/* Pequeño Cinnamoroll asomándose en cada día */
-body.cinnamoroll-mode .day-header::after {
-    content: '';
-    position: absolute;
-    top: -25px;
-    right: 5px;
-    width: 40px;
-    height: 30px;
-    background-image: url('https://pngimg.com/uploads/cinnamoroll/small/cinnamoroll_PNG34.png'); /* Cara de Cinnamoroll */
-    background-size: contain;
-    background-repeat: no-repeat;
-    z-index: 2;
-}
-
-/* --- BASURA KAWAII --- */
-body.cinnamoroll-mode .trash-zone {
-    background: #fff0f5;
-    border: 4px dotted #ff8fab;
-    color: #ff6b81;
-    border-radius: 30px;
-    position: relative;
-}
-body.cinnamoroll-mode .trash-zone i { display: none; } /* Oculta icono normal */
-body.cinnamoroll-mode .trash-zone::before {
-    content: '🍮'; /* Un flan o postre en vez de basura */
-    font-size: 2rem;
-    display: block;
-    margin-bottom: 5px;
-}
-body.cinnamoroll-mode .trash-zone::after {
-    content: ' (Desaparecer)';
-    font-size: 0.8rem;
-}
-
-/* --- TAREAS --- */
-body.cinnamoroll-mode .tasks-header h2 {
-    text-align: center;
-}
-/* Decoración de título con estrellitas */
-body.cinnamoroll-mode .tasks-header h2::before,
-body.cinnamoroll-mode .tasks-header h2::after {
-    content: '✨';
-    margin: 0 10px;
-    color: var(--cinnamo-pink-pop);
-}
-
-body.cinnamoroll-mode .task-item {
-    border-bottom: 2px dashed var(--cinnamo-pink-soft);
-    background: #fffafc;
-    margin-bottom: 8px;
-    border-radius: 15px;
-}
-body.cinnamoroll-mode .task-item button {
-    color: var(--cinnamo-pink-pop) !important;
-    background: var(--cinnamo-pink-pale) !important;
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-}
-
-/* =================================================================
-   DETALLES EXTRA KAWAII: NUBES Y DECORACIÓN
-   ================================================================= */
-
-/* --- 1. FONDO CON NUBES FLOTANTES ANIMADAS --- */
-body.cinnamoroll-mode::before {
-    content: '☁️        ☁️     ☁️';
-    position: fixed;
-    top: -50px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    font-size: 4rem; /* Nubes grandes */
-    color: rgba(255, 255, 255, 0.6); /* Semitransparentes */
-    text-shadow: 0 0 20px #b0e0e6; /* Brillo azul */
-    pointer-events: none;
-    z-index: -1;
-    animation: floatClouds 20s linear infinite;
-    opacity: 0.5;
-}
-
-@keyframes floatClouds {
-    0% { transform: translateY(0) translateX(0); }
-    50% { transform: translateY(20px) translateX(20px); }
-    100% { transform: translateY(0) translateX(0); }
-}
-
-/* --- 2. DECORACIÓN DE LAZOS Y ESTRELLAS EN PANELES --- */
-
-/* Lazo en la esquina de la barra lateral */
-body.cinnamoroll-mode .sidebar-palette::after {
-    content: '🎀';
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    font-size: 2.5rem;
-    transform: rotate(-15deg);
-    z-index: 10;
-    filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.1));
-}
-
-/* Estrellas en el grid del horario */
-body.cinnamoroll-mode .schedule-grid-wrapper::after {
-    content: '✨';
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 1.5rem;
-    color: var(--cinnamo-pink-pop);
-    animation: twinkle 2s infinite alternate;
-}
-
-@keyframes twinkle {
-    0% { opacity: 0.5; transform: scale(1); }
-    100% { opacity: 1; transform: scale(1.2); }
-}
-
-/* =================================================================
-   DÍAS DE LA SEMANA: ZOOLÓGICO KAWAII ANIMADO
-   ================================================================= */
-
-/* 1. Base para TODOS los días (Verde Menta Súper Clarito) */
-body.cinnamoroll-mode .day-header {
-    background: #f0fdf4 !important;  /* Menta helada muy pálido */
-    border: 3px solid #86efac !important; /* Borde verde pastel suave */
-    color: #166534 !important; /* Texto verde bosque */
-    box-shadow: 0 4px 0 #bbf7d0 !important; /* Sombra 3D suave */
-    border-radius: 20px;
-    margin-top: 20px; /* Espacio para los animales */
-    overflow: visible !important; /* ¡Para que los animales se salgan del cuadro! */
-    position: relative;
-}
-
-/* 2. Configuración común para los animales */
-body.cinnamoroll-mode .day-header::after {
-    content: '';
-    position: absolute;
-    top: -35px; /* Se asoman por arriba */
-    right: -5px;
-    width: 50px;
-    height: 50px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    z-index: 10;
-    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1)); /* Sombrita para el animal */
-}
-
-/* --- PERSONALIZACIÓN POR DÍA --- */
-
-/* LUNES: SAPITO 🐸 (Salta) */
-body.cinnamoroll-mode .day-header:nth-of-type(1)::after {
-    background-image: url('https://img.icons8.com/Dusk_Wired/1200/cinnamoroll.jpg');
-    animation: jump 1.5s infinite ease-in-out;
-}
-
-/* MARTES: KOALA 🐨 (Se balancea de sueño) */
-body.cinnamoroll-mode .day-header:nth-of-type(2)::after {
-    background-image: url('https://www.pngall.com/wp-content/uploads/13/Cinnamoroll-PNG-Image-HD.png');
-    animation: sway 3s infinite ease-in-out;
-    top: -30px; /* El koala es más bajito */
-}
-
-/* MIÉRCOLES: CONEJITO 🐰 (Brinca rápido) */
-body.cinnamoroll-mode .day-header:nth-of-type(3)::after {
-    background-image: url('https://cdn-icons-png.flaticon.com/128/17517/17517835.png');
-    animation: hop 1s infinite alternate;
-}
-
-/* JUEVES: OSITO 🐻 (Se asoma curioso) */
-body.cinnamoroll-mode .day-header:nth-of-type(4)::after {
-    background-image: url('https://cdn-icons-png.flaticon.com/128/18118/18118747.png');
-    animation: peek 3s infinite;
-}
-
-/* VIERNES: POLLITO 🐥 (Aletea feliz porque es viernes) */
-body.cinnamoroll-mode .day-header:nth-of-type(5)::after {
-    background-image: url('https://cdn-icons-png.flaticon.com/128/4200/4200123.png');
-    animation: wiggle 0.5s infinite;
-}
-
-/* SÁBADO: GATITO 🐱 (Flota relajado) */
-body.cinnamoroll-mode .day-header:nth-of-type(6)::after {
-    background-image: url('https://cdn-icons-png.flaticon.com/128/4478/4478363.png');
-    animation: float 2s infinite ease-in-out;
-}
-
-/* DOMINGO: PERRITO 🐶 (Mueve la cabeza) */
-body.cinnamoroll-mode .day-header:nth-of-type(7)::after {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/3069/3069159.png');
-    animation: headBob 2s infinite ease-in-out;
-}
-
-/* --- ANIMACIONES --- */
-
-@keyframes jump {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-}
-
-@keyframes sway {
-    0%, 100% { transform: rotate(-5deg); }
-    50% { transform: rotate(5deg); }
-}
-
-@keyframes hop {
-    0% { transform: translateY(0) scale(1, 1); }
-    100% { transform: translateY(-5px) scale(1.05, 0.95); }
-}
-
-@keyframes peek {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(5px); } /* Se esconde un poquito */
-}
-
-@keyframes wiggle {
-    0%, 100% { transform: rotate(-3deg); }
-    50% { transform: rotate(3deg); }
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-4px); }
-}
-
-@keyframes headBob {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-5deg); }
-    75% { transform: rotate(5deg); }
-}
-
-/* 3. Decoración Extra: Nenúfar (Hoja de loto) en la esquina opuesta */
-body.cinnamoroll-mode .day-header::before {
-    content: '🍀'; /* Trébol o Nenúfar */
-    position: absolute;
-    bottom: 2px;
-    left: 5px;
-    font-size: 1rem;
-    opacity: 0.6;
-    color: #047857;
-}
-
-/* Animación del sapito saltando suavemente */
-@keyframes frogJump {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-3px) rotate(5deg); }
-}
-
-/* --- 3. INPUTS MÁS TIERNOS --- */
-body.cinnamoroll-mode input {
-    background-color: #fffaf0 !important; /* Blanco floral */
-    border: 2px dashed var(--cinnamo-blue-sky) !important; /* Borde punteado azul */
-}
-
-/* --- 4. CELDAS DEL HORARIO DECORADAS --- */
-/* Cuando pasas el mouse por una celda vacía, aparece un corazoncito */
-body.cinnamoroll-mode .schedule-cell:not(:has(.subject-chip)):hover::after {
-    content: '💙';
-    font-size: 1.2rem;
-    opacity: 0.3;
-}
-
-/* --- ESTILOS GLOBALES --- */
+/* --- ESTILOS GLOBALES & TIPOGRAFÍA --- */
 html, body {
-    margin: 0; padding: 0; width: 100%; height: 100vh; overflow: hidden;
-    font-family: 'Inter', 'Segoe UI', sans-serif; /* Fuente moderna */
-    background-color: var(--bg-app);
-    color: var(--text-main);
-    transition: background-color 0.3s, color 0.3s;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    color: #4A443F;
+    font-size: 15px;
+    letter-spacing: 0.1px;
 }
 
-/* Login */
+h1, h2, .brand-title, .quote-text {
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 600;
+    font-style: italic; /* Le da el toque romántico / lovely */
+    letter-spacing: 0.3px;
+}
+
+/* --- LOGIN PANELES REDONDOS --- */
 .login-wrapper {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--nav-bg); z-index: 1000;
+    background: rgba(234, 191, 189, 0.3);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
     display: flex; justify-content: center; align-items: center;
+    animation: fadeIn 0.4s ease-out;
 }
-.login-box {
-    background: var(--bg-panel); padding: 2.5rem; border-radius: 20px;
-    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); width: 320px;
-}
-.hidden { display: none !important; }
 
-/* Layout App */
+.login-box {
+    background: var(--bg-panel); 
+    padding: 3rem 2.5rem; 
+    border-radius: 35px;
+    border: 3px solid var(--sakura-pink-light);
+    box-shadow: 0 20px 40px rgba(132, 123, 84, 0.12); 
+    width: 320px;
+    text-align: center;
+}
+
+.login-box h2 {
+    color: var(--sakura-sage-dark);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 12px 18px;
+    margin-bottom: 12px;
+    border-radius: 50px;
+    border: 2px solid var(--sakura-pink-light);
+    outline: none;
+    box-sizing: border-box;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.login-box input:focus {
+    border-color: var(--sakura-pink-main);
+    box-shadow: 0 0 10px rgba(230, 134, 142, 0.3);
+}
+
+.login-box button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 50px;
+    border: none;
+    background: var(--sakura-pink-main);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(230, 134, 142, 0.4);
+    transition: all 0.3s ease;
+}
+
+.login-box button:hover {
+    transform: translateY(-2px);
+    background: var(--primary-hover);
+    box-shadow: 0 6px 16px rgba(230, 134, 142, 0.5);
+}
+
+.hidden { display: none !important; }
 .app-layout { display: flex; height: 100vh; width: 100vw; }
 
-/* Navegación */
+/* --- NUEVA BARRA LATERAL IZQUIERDA (ESTILO REFERENCIA) --- */
 .main-nav {
-    width: 80px; background: var(--nav-bg);
-    display: flex; flex-direction: column; justify-content: space-between;
-    align-items: center; padding: 30px 0; flex-shrink: 0;
+    width: 220px;
+    height: 100vh;
+    background: #FFFFFF;
+    border-right: 1px solid #F5D3D8;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 20px 20px 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    margin: 0;
+    border-radius: 0; /* Ocupa todo el alto */
+    box-shadow: 4px 0 15px rgba(230, 134, 142, 0.03);
 }
-.nav-btn {
-    background: transparent; border: none; color: #94a3b8;;
-    font-size: 1.4rem; padding: 15px; border-radius: 12px;
-    cursor: pointer; transition: 0.2s; margin-bottom: 10px;
+
+/* Marca / Logo Superior */
+.nav-brand {
+    text-align: center;
+    margin-bottom: 25px;
 }
-.nav-btn:hover { color: white; background: rgba(255,255,255,0.1); }
-.nav-btn.active { color: white; background: var(--primary); }
-
-/* Contenido */
-.content-area { flex-grow: 1; position: relative; background: var(--bg-app); overflow: hidden; }
-.view-section { width: 100%; height: 100%; padding: 20px; box-sizing: border-box; }
-.hidden-view { display: none; }
-.active-view { display: block; animation: fadeUp 0.3s ease-out; }
-
-@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-/* --- SECCIÓN HORARIO --- */
-.schedule-wrapper { display: flex; gap: 20px; height: 100%; }
-
-/* Sidebar Materias (Izquierda) */
-.sidebar-palette {
-    width: 260px; background: var(--bg-panel);
-    border-radius: 20px; padding: 20px;
-    display: flex; flex-direction: column;
-    border: 1px solid var(--border-color);
-    /* Reemplaza los box-shadow antiguos por este estilo: */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+.brand-ribbon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 4px;
+    filter: drop-shadow(0 2px 4px rgba(230, 134, 142, 0.2));
 }
-.sidebar-palette h3 { margin-top: 0; color: var(--text-main); font-weight: 600; }
+.brand-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: #5C5446;
+    margin: 0;
+    font-style: italic;
+    font-weight: 600;
+}
 
-/* --- CONFIGURACIÓN DE DÍAS (SIDEBAR) --- */
-.config-days-box {
-    margin: 20px 0;
-    padding: 15px;
-    background: var(--bg-app);
-    border-radius: 15px;
-    border: 1px solid var(--border-color);
+.brand-subtitle, .sub-text, .timer-subtext, small, p {
+    font-weight: 300;
+    letter-spacing: 0.3px;
 }
-.config-days-box h4 {
-    margin: 0 0 10px 0;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+
+/* BOTONES Y ELEMENTOS DE NAVEGACIÓN */
+button, input, select {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 500;
 }
-.day-toggle {
+
+/* Botones de Menú */
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.main-nav .nav-btn {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #7A7067;
+    font-size: 0.9rem;
+    padding: 12px 18px;
+    border-radius: 18px;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    color: var(--text-main);
-}
-.day-toggle input[type="checkbox"] {
-    accent-color: var(--primary); /* Pone el checkbox del color de tu tema */
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
+    gap: 12px;
+    font-family: inherit;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    text-align: left;
+    margin-bottom: 0;
 }
 
-/* --- INPUTS REDONDEADOS Y PROFESIONALES --- */
-.add-subject-box {
-    display: flex; align-items: center; gap: 10px;
-    background: var(--bg-app); padding: 8px;
-    border-radius: 50px; /* Borde completamente redondo */
-    border: 1px solid var(--border-color);
-    margin-bottom: 20px;
+.main-nav .nav-btn i {
+    font-size: 1rem;
+    color: #B5ACA3;
+    width: 20px;
+    text-align: center;
+    transition: color 0.25s ease;
 }
+
+.main-nav .nav-btn:hover {
+    background: #FFF5F6;
+    color: #E6868E;
+    transform: translateX(4px);
+}
+.main-nav .nav-btn:hover i {
+    color: #E6868E;
+}
+
+/* Estado Activo estilo la foto (Rosa Suave) */
+.main-nav .nav-btn.active {
+    background: #FCE8EC;
+    color: #E6868E;
+    font-weight: 600;
+    box-shadow: none;
+    transform: none;
+}
+.main-nav .nav-btn.active i {
+    color: #E6868E;
+}
+
+/* Footer de la Barra Lateral */
+.nav-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+}
+
+.quote-pill {
+    background: #FFF0F2;
+    border-radius: 15px;
+    padding: 10px 14px;
+    text-align: center;
+    font-size: 0.72rem;
+    color: #8C827A;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px dashed #F3D0D7;
+}
+.quote-pill span { display: block; }
+.quote-pill strong { color: #E6868E; }
+
+.bunny-illustration img {
+    width: 85px;
+    height: auto;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
+    transition: transform 0.3s ease;
+}
+.bunny-illustration img:hover {
+    transform: scale(1.08) rotate(-3deg);
+}
+
+.logout-btn-text {
+    background: transparent;
+    border: none;
+    color: #B5ACA3;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+.logout-btn-text:hover {
+    color: #e56b6f;
+    background: #FDF0F0;
+}
+
+/* --- ÁREA DE CONTENIDO Y TRANSICIONES --- */
+.content-area { flex-grow: 1; position: relative; background: var(--bg-app); overflow: hidden; }
+.view-section { width: 100%; height: 100%; padding: 15px 20px; box-sizing: border-box; }
+.hidden-view { display: none; }
+.active-view { display: block; animation: smoothSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+
+@keyframes smoothSlideUp { 
+    from { opacity: 0; transform: translateY(20px) scale(0.98); } 
+    to { opacity: 1; transform: translateY(0) scale(1); } 
+}
+
+/* --- CONTENEDOR PRINCIPAL DEL HORARIO --- */
+.schedule-wrapper { display: flex; gap: 15px; height: 100%; }
+
+/* --- SIDEBAR IZQUIERDA (MATERIAS) --- */
+.sidebar-palette {
+    width: 270px; background: var(--bg-panel);
+    border-radius: 30px; padding: 20px;
+    display: flex; flex-direction: column;
+    border: 2px solid var(--sakura-pink-light);
+    box-shadow: 0 10px 30px rgba(132, 123, 84, 0.08);
+    position: relative;
+}
+
+/* Decoración estética de laño/moño en la cabecera */
+.sidebar-palette::before {
+    content: '🎀';
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    font-size: 1.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.sidebar-palette h3 { 
+    margin-top: 5px; 
+    color: var(--text-main); 
+    font-size: 1.2rem;
+    font-weight: 600; 
+}
+
+/* --- INPUTS Y CONTROLES HIPER-REDONDEADOS --- */
+.add-subject-box {
+    display: flex; align-items: center; gap: 8px;
+    background: #FAF7F6; padding: 6px 10px;
+    border-radius: 50px; 
+    border: 2px dashed var(--sakura-pink-light);
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.add-subject-box:focus-within {
+    border-style: solid;
+    border-color: var(--sakura-pink-main);
+    box-shadow: 0 0 10px rgba(230, 134, 142, 0.2);
+}
+
 .add-subject-box input[type="text"] {
     border: none; background: transparent; flex: 1;
-    padding: 8px 10px; outline: none; color: var(--text-main);
-    font-size: 0.9rem;
+    padding: 6px; outline: none; color: var(--text-main);
+    font-size: 0.88rem; font-family: inherit;
 }
+
 .color-picker-wrapper {
-    width: 30px; height: 30px; border-radius: 50%; overflow: hidden;
-    border: 2px solid var(--border-color); cursor: pointer;
+    width: 26px; height: 26px; border-radius: 50%; overflow: hidden;
+    border: 2px solid white; cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    flex-shrink: 0;
 }
+
 .color-picker-wrapper input[type="color"] {
     width: 150%; height: 150%; margin: -25%; cursor: pointer; border: none; padding: 0;
 }
+
 .add-btn {
-    background: var(--primary); color: white; border: none;
-    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--sakura-pink-main); color: white; border: none;
+    width: 32px; height: 32px; border-radius: 50%;
     cursor: pointer; display: flex; align-items: center; justify-content: center;
-    transition: transform 0.2s;
-}
-.add-btn:hover { transform: scale(1.1); background: var(--primary-hover); }
-
-/* Lista de materias */
-.draggable-pool { flex-grow: 1; overflow-y: auto; padding: 5px; margin-bottom: 10px; }
-
-/* Chips de Materias */
-.subject-chip {
-    padding: 10px 15px; border-radius: 12px; /* Redondeado suave */
-    font-size: 0.85rem; font-weight: 600; color: #1f2937;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    margin-bottom: 8px; cursor: grab; text-align: center;
-    border: 1px solid rgba(0,0,0,0.05);
-}
-.subject-chip:active { cursor: grabbing; transform: scale(0.98); }
-
-/* Basurero */
-.trash-zone {
-    padding: 20px; border-radius: 15px;
-    border: 2px dashed var(--danger);
-    background: var(--danger-bg); color: var(--danger);
-    text-align: center; font-weight: 600; font-size: 0.9rem;
-    transition: 0.2s;
-}
-.trash-zone.drag-over { transform: scale(1.02); opacity: 0.8; }
-
-/* --- GRID HORARIO EDITABLE --- */
-.schedule-grid-wrapper {
-    flex-grow: 1; background: var(--bg-panel);
-    border-radius: 20px; padding: 20px;
-    border: 1px solid var(--border-color);
-    display: flex; flex-direction: column; overflow: hidden;
-    /* Reemplaza los box-shadow antiguos por este estilo: */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 3px 8px rgba(230, 134, 142, 0.4);
+    flex-shrink: 0;
 }
 
-.grid-header-row {
-    display: grid; grid-template-columns: 90px repeat(5, 1fr);
-    gap: 4px; margin-bottom: 4px; text-align: center;
-    font-weight: 600; color: var(--text-muted);
-}
-.day-header { background: var(--header-bg); padding: 12px; border-radius: 10px; color: var(--text-main); }
-.time-header-corner { padding: 12px; font-size: 0.8rem; }
-
-.main-grid {
-    display: grid; grid-template-columns: 90px repeat(5, 1fr);
-    gap: 4px; flex-grow: 1; overflow-y: auto;
+.add-btn:hover { 
+    transform: scale(1.18) rotate(90deg); 
+    background: var(--primary-hover); 
 }
 
-/* Celdas de Hora Editable */
-.time-slot-label {
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.8rem; font-weight: bold; color: var(--text-muted);
-    background: var(--time-bg); border-radius: 10px;
-    text-align: center; padding: 5px; cursor: text;
-    border: 1px solid transparent; transition: border 0.2s;
-}
-.time-slot-label:hover { border: 1px solid var(--border-color); }
-.time-slot-label:focus {
-    background: var(--bg-panel); border: 2px solid var(--primary);
-    outline: none; color: var(--text-main);
-}
-
-/* Celdas del Horario */
-/* En styles.css */
-
-.schedule-cell {
-    background: var(--cell-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    min-height: 70px;
-    
-    /* ESTO ES LO IMPORTANTE: */
-    position: relative; /* Referencia para el hijo */
-    padding: 0 !important; /* Cero espacio interno a la fuerza */
-    overflow: hidden; /* Recorta lo que sobre (esquinas redondas) */
-    z-index: 1;
-}
-
-/* Cuando la materia está DENTRO del horario */
-.schedule-cell .subject-chip {
-    position: absolute; /* Se libera del flujo normal */
-    top: 0;
-    left: 0;
-    width: 100% !important;
-    height: 100% !important;
-    margin: 0 !important;
-    border-radius: 0 !important; /* Cuadrado perfecto (el padre recorta las esquinas) */
-    box-shadow: none;
-    
-    /* Centrado del texto */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    
-    /* Estética del texto */
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: rgba(0, 0, 0, 0.7);
-    padding: 5px;
-    box-sizing: border-box; /* Para que el padding no rompa el ancho */
-}
-
-.schedule-cell.drag-over { background: rgba(16, 185, 129, 0.1); border: 2px dashed var(--primary); }
-
-/* --- TAREAS --- */
-.tasks-container {
-    max-width: 900px; margin: 0 auto; background: var(--bg-panel);
-    border-radius: 20px; padding: 40px; height: 90%;
-    /* Reemplaza los box-shadow antiguos por este estilo: */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    display: flex; flex-direction: column;
-}
-.tasks-header { border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px; }
-.tasks-header h2 { color: var(--text-main); margin-top: 0; }
-.input-group { display: flex; gap: 10px; }
-.input-group input { 
-    padding: 12px 15px; border-radius: 12px; border: 1px solid var(--border-color);
-    background: var(--bg-app); color: var(--text-main); flex: 1; outline: none;
-}
-.input-group button {
-    padding: 0 25px; background: var(--primary); color: white;
-    border: none; border-radius: 12px; font-weight: 600; cursor: pointer;
-}
-.task-item {
-    display: flex; justify-content: space-between; padding: 15px;
-    border-bottom: 1px solid var(--border-color); color: var(--text-main);
-}
+/* --- PANEL DE CONFIGURACIÓN DE DÍAS --- */
 .config-days-box {
-    margin: 20px 0;
-    padding: 15px;
-    background: var(--bg-app); /* Se adapta al tema oscuro/claro */
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-}
-.day-toggle {
-    display: flex;
-    justify-content: space-between; /* Texto a la izq, botón a la der */
-    align-items: center;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    color: var(--text-main);
-    user-select: none;
-}
-.day-toggle input { display: none; 
-}
-.toggle-slider {
-    width: 40px;
-    height: 22px;
-    background-color: #e5e7eb; /* Gris apagado */
+    margin: 10px 0;
+    padding: 12px;
+    background: #FAF7F6;
     border-radius: 20px;
-    position: relative;
-    transition: background-color 0.3s;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid rgba(234, 191, 189, 0.4);
 }
+
+.config-days-box h4 {
+    margin: 0 0 8px 0;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.day-toggle {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 6px; cursor: pointer; font-size: 0.85rem;
+    color: var(--text-main);
+}
+
+.toggle-slider {
+    width: 36px; height: 20px;
+    background-color: #E2DDD9;
+    border-radius: 20px; position: relative;
+    transition: background-color 0.3s ease;
+}
+
 .toggle-slider::after {
-    content: '';
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    background-color: white;
-    border-radius: 50%;
-    top: 2px;
-    left: 2px;
-    transition: transform 0.3s, background-color 0.3s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    content: ''; position: absolute;
+    width: 16px; height: 16px;
+    background-color: white; border-radius: 50%;
+    top: 2px; left: 2px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
 }
+
 .day-toggle input:checked + .toggle-slider {
-    background-color: var(--primary); /* Se pone verde (o el color del tema) */
+    background-color: var(--sakura-pink-main);
 }
 
 .day-toggle input:checked + .toggle-slider::after {
-    transform: translateX(18px); /* Se mueve a la derecha */
+    transform: translateX(16px);
 }
 
-/* CORRECCIÓN DE RECUADRO ROJO RANDOM */
-/* Aseguramos que solo el basurero real tenga borde rojo */
+/* --- CHIPS DE MATERIAS (TIPO CÁPSULA GEL) --- */
+.draggable-pool { flex-grow: 1; overflow-y: auto; padding: 5px; margin-bottom: 10px; }
+
+.subject-chip {
+    padding: 10px 16px; 
+    border-radius: 50px; /* Redondeado cápsula perfecto */
+    font-size: 0.85rem; font-weight: 600; 
+    color: var(--sakura-sage-dark);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+    margin-bottom: 10px; cursor: grab; text-align: center;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.subject-chip:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+}
+
+.subject-chip:active { 
+    cursor: grabbing; 
+    transform: scale(0.95); 
+}
+
+/* --- BASURA INTERACTIVA --- */
 .trash-zone {
-    /* ... propiedades anteriores ... */
-    margin-top: auto; /* Empuja al fondo */
-    min-height: 50px; /* Asegura que tenga altura */
+    padding: 14px; border-radius: 25px;
+    border: 2px dashed var(--danger);
+    background: var(--danger-bg); color: var(--danger);
+    text-align: center; font-weight: 600; font-size: 0.82rem;
+    transition: all 0.3s ease;
+    margin-top: auto;
 }
 
-/* Si tenías un div vacío causando problemas, esto lo oculta si no es el basurero */
-div:empty:not(.trash-zone):not(.draggable-pool):not(.schedule-cell) {
-    display: none;
+.trash-zone.drag-over { 
+    transform: scale(1.05); 
+    background: #fbdada;
+    border-style: solid;
+    animation: pulse 0.8s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1.02); }
+    100% { transform: scale(1.07); }
+}
+
+/* --- GRID DEL HORARIO PRINCIPAL --- */
+.schedule-grid-wrapper {
+    flex-grow: 1; background: var(--bg-panel);
+    border-radius: 35px; padding: 20px;
+    border: 2px solid var(--sakura-pink-light);
+    display: flex; flex-direction: column; overflow: hidden;
+    box-shadow: 0 10px 30px rgba(132, 123, 84, 0.08);
+}
+
+.grid-header-row {
+    display: grid; grid-template-columns: 85px repeat(5, 1fr);
+    gap: 8px; margin-bottom: 8px; text-align: center;
+    font-weight: 600;
+}
+
+/* CABECERAS DE DÍAS CON ANIMALITOS Y PILDORAS REDONDAS */
+.day-header { 
+    background: var(--sakura-pink-light); 
+    padding: 10px 6px; 
+    border-radius: 25px; 
+    color: var(--sakura-sage-dark);
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    position: relative;
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.day-header:hover {
+    transform: translateY(-2px);
+}
+
+/* Iconos de cabecera por día */
+.day-header::after {
+    position: absolute;
+    top: -22px;
+    right: 50%;
+    transform: translateX(50%);
+    font-size: 1.2rem;
+}
+
+.day-header:nth-of-type(1)::after { content: '🦢'; }
+.day-header:nth-of-type(2)::after { content: '🍓'; }
+.day-header:nth-of-type(3)::after { content: '🧁'; }
+.day-header:nth-of-type(4)::after { content: '🌵'; }
+.day-header:nth-of-type(5)::after { content: '🌽'; }
+.day-header:nth-of-type(6)::after { content: '🐶'; }
+.day-header:nth-of-type(7)::after { content: '🐱'; }
+
+.time-header-corner { 
+    padding: 10px; font-size: 0.75rem; 
+    color: var(--text-muted);
+    display: flex; align-items: center; justify-content: center;
+}
+
+.main-grid {
+    display: grid; grid-template-columns: 85px repeat(5, 1fr);
+    gap: 8px; flex-grow: 1; overflow-y: auto;
+    padding-right: 4px;
+}
+
+/* Personalización del Scrollbar */
+.main-grid::-webkit-scrollbar, .draggable-pool::-webkit-scrollbar {
+    width: 6px;
+}
+.main-grid::-webkit-scrollbar-thumb, .draggable-pool::-webkit-scrollbar-thumb {
+    background: var(--sakura-pink-light);
+    border-radius: 10px;
+}
+
+/* Oculta los casilleros nativos dentro del panel de días visibles */
+.day-toggle input[type="checkbox"] {
+    display: none !important;
+}
+
+/* ETANQUETA DE HORAS (BOTONES REDONDEADOS SUAVES) */
+.time-slot-label {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 600; color: var(--sakura-sage-dark);
+    background: var(--time-bg); border-radius: 20px;
+    text-align: center; padding: 4px; cursor: text;
+    border: 1px solid transparent; transition: all 0.3s ease;
+}
+
+.time-slot-label:hover { 
+    border-color: var(--sakura-pink-light); 
+    background: white;
+}
+
+.time-slot-label:focus {
+    background: white; border: 2px solid var(--sakura-pink-main);
+    outline: none; box-shadow: 0 0 8px rgba(230, 134, 142, 0.3);
+}
+
+/* CELDAS DEL GRID */
+.schedule-cell {
+    background: var(--cell-bg);
+    border: 1.5px solid rgba(234, 191, 189, 0.4);
+    border-radius: 18px;
+    min-height: 60px;
+    position: relative;
+    padding: 0 !important;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.schedule-cell:hover {
+    border-color: var(--sakura-pink-light);
+    background: #FFFFFF;
+}
+
+.schedule-cell.drag-over { 
+    background: rgba(230, 134, 142, 0.15); 
+    border: 2px dashed var(--sakura-pink-main); 
+    transform: scale(0.97);
+}
+
+/* Materias dentro de la celda */
+.schedule-cell .subject-chip {
+    position: absolute; top: 0; left: 0;
+    width: 100% !important; height: 100% !important;
+    margin: 0 !important; border-radius: 16px !important;
+    box-shadow: none; border: none;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; font-size: 0.85rem; font-weight: 600;
+    padding: 4px; box-sizing: border-box;
+    animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.6); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- VISTA DE TAREAS --- */
+.tasks-container {
+    max-width: 800px; margin: 0 auto; background: var(--bg-panel);
+    border-radius: 35px; padding: 35px; height: 85%;
+    border: 2px solid var(--sakura-pink-light);
+    box-shadow: 0 10px 30px rgba(132, 123, 84, 0.08);
+    display: flex; flex-direction: column;
+}
+
+.tasks-header { 
+    border-bottom: 2px dashed var(--sakura-pink-light); 
+    padding-bottom: 20px; margin-bottom: 20px; 
+}
+
+.tasks-header h2 { 
+    color: var(--sakura-sage-dark); 
+    margin-top: 0; 
+    font-size: 1.6rem;
+}
+
+.input-group { display: flex; gap: 10px; }
+
+.input-group input { 
+    padding: 12px 18px; 
+    border-radius: 50px; 
+    border: 2px solid var(--sakura-pink-light);
+    background: #FAF7F6; color: var(--text-main); 
+    flex: 1; outline: none; font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: var(--sakura-pink-main);
+    background: white;
+}
+
+.input-group button {
+    padding: 0 25px; 
+    background: var(--sakura-pink-main); 
+    color: white;
+    border: none; border-radius: 50px; 
+    font-weight: 600; cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 4px 12px rgba(230, 134, 142, 0.3);
+    transition: all 0.3s ease;
+}
+
+.input-group button:hover {
+    transform: translateY(-2px);
+    background: var(--primary-hover);
+}
+
+.task-list {
+    list-style: none; padding: 0; margin: 0;
+    overflow-y: auto; flex-grow: 1;
+}
+
+.task-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 20px;
+    background: #FAF7F6;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(234, 191, 189, 0.3);
+    transition: all 0.3s ease;
+}
+
+.task-item:hover {
+    transform: translateX(4px);
+    background: white;
+    border-color: var(--sakura-pink-light);
+}
+
+.task-item button {
+    background: var(--danger-bg);
+    color: var(--danger);
+    border: none;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.task-item button:hover {
+    background: var(--danger);
+    color: white;
+}
+
+/* =================================================================
+   VISTA RELOJ Y MÚSICA (FOCUS ZONE)
+   ================================================================= */
+.focus-container {
+    display: flex;
+    gap: 20px;
+    height: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+    align-items: stretch;
+}
+
+/* CARDA RELOJ DIGITAL */
+.clock-card {
+    flex: 1.2;
+    background: var(--bg-panel);
+    border-radius: 35px;
+    border: 2px solid var(--sakura-pink-light);
+    box-shadow: 0 10px 30px rgba(132, 123, 84, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    position: relative;
+}
+
+.clock-badge {
+    background: var(--sakura-pink-light);
+    color: var(--sakura-sage-dark);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.digital-clock {
+    font-size: 4.5rem;
+    font-weight: 600;
+    color: var(--sakura-pink-main);
+    letter-spacing: 2px;
+    text-shadow: 0 4px 12px rgba(230, 134, 142, 0.25);
+    font-family: 'Fredoka', cursive, sans-serif;
+    line-height: 1;
+}
+
+.digital-date {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+/* CARD REPRODUCTOR DE MÚSICA */
+.music-card {
+    flex: 1;
+    background: var(--bg-panel);
+    border-radius: 35px;
+    border: 2px solid var(--sakura-pink-light);
+    box-shadow: 0 10px 30px rgba(132, 123, 84, 0.08);
+    padding: 25px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+}
+
+.music-card h3 {
+    margin: 0 0 5px 0;
+    color: var(--sakura-sage-dark);
+    font-size: 1.3rem;
+}
+
+.player-wrapper h4 {
+    margin: 0 0 8px 0;
+    color: var(--sakura-sage-light);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+@media (max-width: 850px) {
+    .focus-container {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+    .digital-clock {
+        font-size: 3.2rem;
+    }
+
+}
+/* =================================================================
+   FOCUS DASHBOARD (ESTILO REFERENCIA EXACTO)
+   ================================================================= */
+.dashboard-header {
+    margin-bottom: 15px;
+}
+.dashboard-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    color: #5C5446;
+    font-family: 'Playfair Display', serif, sans-serif;
+}
+.dashboard-header .heart-icon { color: #E6868E; }
+.dashboard-header p {
+    margin: 3px 0 0 0;
+    font-size: 0.9rem;
+    color: #A39B8B;
+}
+
+/* GRID PRINCIPAL DE 3 COLUMNAS */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 0.9fr;
+    gap: 18px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.card-custom {
+    background: #FFFFFF;
+    border: 1px solid #F5D3D8;
+    border-radius: 24px;
+    padding: 18px;
+    box-shadow: 0 4px 15px rgba(230, 134, 142, 0.04);
+}
+
+.card-title, h3, h4, .music-title-bar strong {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 600;
+    color: #5C4B43;
+}
+
+/* 1. POMODORO */
+.pomodoro-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.pomo-tabs {
+    display: flex;
+    background: #FAF2F3;
+    padding: 4px;
+    border-radius: 30px;
+    gap: 4px;
+    margin-bottom: 15px;
+}
+.pomo-tab {
+    border: none;
+    background: transparent;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: #8C827A;
+    cursor: pointer;
+    font-family: inherit;
+}
+.pomo-tab.active {
+    background: #E6868E;
+    color: white;
+}
+.pomo-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 6px solid #FCDAE0;
+    border-top-color: #E6868E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+#timer-display {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #4A4238;
+}
+.pomo-controls {
+    display: flex;
+    gap: 10px;
+}
+#start-timer-btn {
+    background: #E6868E;
+    color: white;
+    border: none;
+    padding: 8px 22px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(230, 134, 142, 0.3);
+}
+.icon-btn {
+    background: #FAF2F3;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    color: #8C827A;
+    cursor: pointer;
+}
+
+/* --- SUBTEXTO DEL CRONÓMETRO --- */
+.timer-subtext {
+    font-size: 0.7rem;
+    color: #A39B8B;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+/* --- RELOJ ANIMADO Y LLAMATIVO --- */
+.clock-card-styled {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.glow-clock-wrapper {
+    position: relative;
+    width: 145px;
+    height: 145px;
+    margin: 8px 0 14px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clock-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #E6868E, #F5D3D8, #AFA975, #E6868E);
+    animation: rotateGlow 12s linear infinite;
+    filter: blur(4px);
+    opacity: 0.6;
+}
+
+@keyframes rotateGlow {
+    100% { transform: rotate(360deg); }
+}
+
+/* Esfera interior neomórfica */
+.analog-clock-fancy {
+    position: relative;
+    width: 135px;
+    height: 135px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    box-shadow: inset 0 4px 10px rgba(230, 134, 142, 0.15), 0 6px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #FFF0F2;
+}
+
+.clock-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Números del reloj estilizados */
+.clock-face .number {
+    position: absolute;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #8C827A;
+    font-family: 'Playfair Display', serif;
+}
+.n12 { top: 6px; left: 50%; transform: translateX(-50%); }
+.n3  { right: 10px; top: 50%; transform: translateY(-50%); }
+.n6  { bottom: 6px; left: 50%; transform: translateX(-50%); }
+.n9  { left: 10px; top: 50%; transform: translateY(-50%); }
+
+/* Agujas del Reloj */
+.analog-clock-fancy .hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    border-radius: 10px;
+    transition: transform 0.05s cubic-bezier(0.4, 2.08, 0.55, 0.44);
+}
+
+.analog-clock-fancy .hour {
+    width: 4px;
+    height: 34px;
+    background: #5C5446;
+    margin-left: -2px;
+}
+
+.analog-clock-fancy .minute {
+    width: 3px;
+    height: 46px;
+    background: #E6868E;
+    margin-left: -1.5px;
+}
+
+/* Segundero estilizado con brillo */
+.analog-clock-fancy .second {
+    width: 1.5px;
+    height: 52px;
+    background: #D8737C;
+    margin-left: -0.75px;
+    box-shadow: 0 0 6px rgba(230, 134, 142, 0.8);
+}
+
+/* Centro brillante */
+.center-gem {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.7rem;
+    line-height: 1;
+    pointer-events: none;
+    animation: gemPulse 2s infinite ease-in-out;
+}
+
+@keyframes gemPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* Insignia digital mejorada */
+.digital-badge {
+    background: linear-gradient(135deg, #FFF0F2 0%, #FCE8EC 100%);
+    color: #E6868E;
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 3.3rem !important;
+    box-shadow: 0 2px 8px rgba(230, 134, 142, 0.15);
+    border: 1px solid #FAD2D8;
+}
+
+/* NÚMEROS DEL TEMPORIZADOR Y RELOJ EN ESTILO FINO */
+#timer-display, .digital-badge {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-weight: 500 !important;
+    letter-spacing: 1px;
+}
+
+.analog-clock {
+    width: 120px;
+    height: 120px;
+    border: 1px dashed #E0D6D8;
+    border-radius: 50%;
+    position: relative;
+    margin: 10px 0 15px 0;
+}
+.analog-clock .hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom;
+    background: #E6868E;
+    border-radius: 4px;
+}
+.analog-clock .hour { width: 3px; height: 30px; background: #8C827A; }
+.analog-clock .minute { width: 2px; height: 42px; background: #E6868E; }
+.analog-clock .second { width: 1px; height: 48px; background: #D8737C; }
+.analog-clock .center-dot {
+    width: 8px; height: 8px; background: #E6868E;
+    border-radius: 50%; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+.digital-badge {
+    background: #FFF0F2;
+    color: #E6868E;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* 3. COLUMNA DERECHA (FRASE & OBJETIVOS) */
+.right-column-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.quote-card {
+    text-align: center;
+    background: #FFF5F6;
+    border: none;
+    position: relative;
+}
+.quote-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #5C5446;
+    margin: 0;
+    font-size: 1rem;
+}
+.quote-leaf { position: absolute; bottom: 8px; right: 12px; font-size: 0.8rem; }
+
+.goals-card h4 { margin: 0 0 10px 0; font-size: 0.85rem; color: #5C5446; }
+.mini-goals { list-style: none; padding: 0; margin: 0; }
+.mini-goals li { margin-bottom: 8px; font-size: 0.8rem; color: #7A7067; }
+.mini-goals label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.mini-goals input[type="checkbox"] { accent-color: #E6868E; }
+
+/* 4. REPRODUCTOR DE MÚSICA ABAJO (ANCHO COMPLETO) */
+.music-player-wide {
+    grid-column: span 3;
+    display: flex;
+    gap: 30px;
+    padding: 20px 25px;
+}
+.music-left { flex: 1.5; }
+.music-title-bar { font-size: 0.9rem; color: #5C5446; margin-bottom: 12px; }
+.music-title-bar .sub-text { color: #B5ACA3; font-size: 0.75rem; margin-left: 8px; }
+
+.player-main-content { display: flex; gap: 20px; align-items: center; }
+.album-art img { width: 140px; height: 110px; border-radius: 18px; object-fit: cover; }
+.player-controls-area .status-badge {
+    background: #FFE8EC; color: #E6868E; font-size: 0.7rem;
+    padding: 3px 10px; border-radius: 12px; font-weight: 600;
+}
+.player-controls-area h3 { margin: 6px 0 2px 0; font-size: 1.1rem; color: #4A4238; }
+.player-controls-area p { margin: 0; font-size: 0.8rem; color: #8C827A; }
+.player-controls-area small { font-size: 0.75rem; color: #A39B8B; }
+
+.playback-buttons { display: flex; align-items: center; gap: 15px; margin-top: 12px; }
+.track-btn { background: none; border: none; color: #A39B8B; cursor: pointer; font-size: 0.9rem; }
+.play-main-btn {
+    background: #E6868E; color: white; border: none;
+    width: 38px; height: 38px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 3px 10px rgba(230, 134, 142, 0.4);
+}
+
+.music-suggestions { flex: 1; border-left: 1px dashed #F3D0D7; padding-left: 20px; }
+.music-suggestions h4 { margin: 0 0 10px 0; font-size: 0.8rem; color: #A39B8B; }
+.music-suggestions ul { list-style: none; padding: 0; margin: 0; }
+.music-suggestions li {
+    display: flex; align-items: center; gap: 10px; padding: 6px 8px;
+    border-radius: 12px; font-size: 0.75rem; color: #6E655F; margin-bottom: 4px;
+}
+.music-suggestions li.active-track { background: #FFF0F2; }
+.music-suggestions img { width: 32px; height: 32px; border-radius: 8px; object-fit: cover; }
+.music-suggestions li div { flex: 1; }
+.music-suggestions li p { margin: 0; color: #A39B8B; font-size: 0.7rem; }
+.signal-icon { color: #E6868E; }
+/* BARRA PARA INGRESAR URL DE MÚSICA */
+.url-input-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.url-input-container input {
+    flex: 1;
+    background: #FAF2F3;
+    border: 1px solid #F5D3D8;
+    border-radius: 18px;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    color: #5C5446;
+    outline: none;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.url-input-container input:focus {
+    background: #FFFFFF;
+    border-color: #E6868E;
+    box-shadow: 0 0 8px rgba(230, 134, 142, 0.2);
+}
+
+.url-input-container button {
+    background: #E6868E;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 18px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s ease;
+}
+
+.url-input-container button:hover {
+    background: #d8737c;
+}
+
+.music-left {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
