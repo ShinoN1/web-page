@@ -1,500 +1,483 @@
-/* =========================================
-   CONFIGURACIÓN Y CONSTANTES
-   ========================================= */
-   const USER_MOCK = "admin";
-   const PASS_MOCK = "1234";
-   
-   // Horas por defecto (se usan si no hay nada guardado)
-   const DEFAULT_TIME_SLOTS = [
-       "08:00 - 09:00", 
-       "09:00 - 10:00", 
-       "10:00 - 11:00", 
-       "11:30 - 12:30", 
-       "12:30 - 13:30", 
-       "15:30 - 16:30", 
-       "16:30 - 17:30"
-   ];
-   
-   // Días base
-   const BASE_DAYS = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
-   let activeDays = [...BASE_DAYS]; // Se actualizará según configuración
-   
-   /* =========================================
-      INICIALIZACIÓN
-      ========================================= */
-   
-   // 1. Verificar Autenticación al cargar
-   if (localStorage.getItem('isLoggedIn') === 'true') {
-       initApp();
-   }
-   
-   // 2. Cargar Tema (Oscuro/Claro)
-   if (localStorage.getItem('theme') === 'dark') {
-       document.body.classList.add('dark-mode');
-       const btn = document.getElementById('theme-btn');
-       if(btn) btn.innerHTML = '<i class="fas fa-sun"></i>';
-   }
-   
-   /* =========================================
-      AUTENTICACIÓN (LOGIN / LOGOUT)
-      ========================================= */
-   
-   document.getElementById('login-form').addEventListener('submit', (e) => {
-       e.preventDefault();
-       const u = document.getElementById('username').value;
-       const p = document.getElementById('password').value;
-   
-       if (u === USER_MOCK && p === PASS_MOCK) {
-           localStorage.setItem('isLoggedIn', 'true');
-           initApp();
-       } else {
-           document.getElementById('login-error').textContent = "Credenciales incorrectas";
-       }
-   });
-   
-   document.getElementById('logout-btn').addEventListener('click', () => {
-       localStorage.removeItem('isLoggedIn');
-       location.reload();
-   });
-   
-   function initApp() {
-       // Ocultar login, mostrar app
-       document.getElementById('login-container').classList.add('hidden');
-       document.getElementById('app-container').classList.remove('hidden');
-   
-       // Cargar configuraciones y datos
-       loadWeekendSettings(); // Configurar Sáb/Dom
-       renderGrid();          // Dibujar tabla
-       loadSavedSubjects();   // Paleta lateral
-       loadScheduleState();   // Rellenar horario
-       loadTasks();           // Tareas
-   }
-   
-   /* =========================================
-      INTERFAZ Y NAVEGACIÓN
-      ========================================= */
-   
-   // Cambiar Tema
-   /* Reemplaza la función toggleTheme anterior con esta: */
-
-function toggleTheme() {
-    const body = document.body;
-    const btn = document.getElementById('theme-btn');
-    
-    // Estado actual
-    const isDark = body.classList.contains('dark-mode');
-    const isCinna = body.classList.contains('cinnamoroll-mode');
-
-    // Lógica de rotación: Claro -> Oscuro -> Cinnamoroll -> Claro
-    if (!isDark && !isCinna) {
-        // 1. Activar Oscuro
-        body.classList.add('dark-mode');
-        localStorage.setItem('theme', 'dark');
-        btn.innerHTML = '<i class="fas fa-moon"></i>'; // Icono Luna
-        btn.style.color = ""; // Reset color
-    } 
-    else if (isDark) {
-        // 2. Activar Cinnamoroll
-        body.classList.remove('dark-mode');
-        body.classList.add('cinnamoroll-mode');
-        localStorage.setItem('theme', 'cinnamoroll');
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Manejo del Login
+    const loginForm = document.getElementById('login-form');
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Evita recargar la página
+        // Oculta el login y muestra la app
+        document.getElementById('login-container').classList.add('hidden');
+        document.getElementById('app-container').classList.remove('hidden');
         
-        // Icono especial (Nube)
-        btn.innerHTML = '<i class="fas fa-cloud"></i>';
-        btn.style.color = "#ffc4d6"; // Color azulito para el icono
-    } 
-    else if (isCinna) {
-        // 3. Volver a Claro (Reset)
-        body.classList.remove('cinnamoroll-mode');
-        localStorage.setItem('theme', 'light');
-        btn.innerHTML = '<i class="fas fa-sun"></i>'; // Icono Sol
-        btn.style.color = "#89cff0";
+        // Iniciar el reloj al entrar
+        updateClock();
+        // Generar la cuadrícula del horario
+        generateGrid();
+    });
+
+    // 2. Evento para el botón de salir
+    document.getElementById('logout-btn').addEventListener('click', () => {
+        document.getElementById('app-container').classList.add('hidden');
+        document.getElementById('login-container').classList.remove('hidden');
+        document.getElementById('login-form').reset();
+    });
+});
+
+// --- NAVEGACIÓN ENTRE PESTAÑAS ---
+function switchView(event, viewName) {
+    // Ocultar todas las vistas
+    const views = document.querySelectorAll('.view-section');
+    views.forEach(view => {
+        view.classList.remove('active-view');
+        view.classList.add('hidden-view');
+    });
+
+    // Quitar la clase active de todos los botones
+    const navButtons = document.querySelectorAll('.main-nav .nav-btn:not(.logout)');
+    navButtons.forEach(btn => btn.classList.remove('active'));
+
+    // Mostrar la vista seleccionada
+    const targetView = document.getElementById(`view-${viewName}`);
+    if (targetView) {
+        targetView.classList.remove('hidden-view');
+        targetView.classList.add('active-view');
+    }
+
+    // Activar el botón presionado
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
     }
 }
 
-/* Y ACTUALIZA TAMBIÉN LA CARGA INICIAL (al principio del archivo script.js) */
-/* Busca donde dice "// 2. Cargar Tema" y pon esto: */
+// --- RELOJ DIGITAL ---
+function updateClock() {
+    const now = new Date();
+    
+    // Formato de hora HH:MM:SS
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    
+    const clockElement = document.getElementById('digital-clock');
+    if (clockElement) {
+        clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+    }
 
-const savedTheme = localStorage.getItem('theme');
-const themeBtn = document.getElementById('theme-btn');
-
-if (savedTheme === 'dark') {
-    document.body.classList.add('dark-mode');
-    if(themeBtn) themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
-} else if (savedTheme === 'cinnamoroll') {
-    document.body.classList.add('cinnamoroll-mode');
-    if(themeBtn) {
-        themeBtn.innerHTML = '<i class="fas fa-cloud"></i>';
-        themeBtn.style.color = "#89cff0";
+    // Formato de fecha
+    const options = { weekday: 'long', day: 'numeric', month: 'long' };
+    const dateString = now.toLocaleDateString('es-ES', options);
+    
+    const dateElement = document.getElementById('digital-date');
+    if (dateElement) {
+        dateElement.textContent = dateString;
     }
 }
-   
-   // Cambiar Pestañas (Horario vs Tareas)
-   function switchView(viewName) {
-       // Ocultar todas las vistas
-       document.querySelectorAll('.view-section').forEach(el => {
-           el.classList.add('hidden-view');
-           el.classList.remove('active-view');
-       });
-       // Mostrar la elegida
-       document.getElementById(`view-${viewName}`).classList.remove('hidden-view');
-       document.getElementById(`view-${viewName}`).classList.add('active-view');
-   
-       // Actualizar botones del menú
-       document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-       // Busca el botón que llamó a la función (si fue click) o búscalo manualmente
-       const clickedBtn = document.querySelector(`.nav-btn[onclick="switchView('${viewName}')"]`);
-       if(clickedBtn) clickedBtn.classList.add('active');
-   }
-   
-   /* =========================================
-      LÓGICA DE DÍAS (SÁBADO / DOMINGO)
-      ========================================= */
-   
-   function loadWeekendSettings() {
-       const settings = JSON.parse(localStorage.getItem('weekendSettings')) || { sat: false, sun: false };
-       
-       const checkSat = document.getElementById('check-sat');
-       const checkSun = document.getElementById('check-sun');
-   
-       if(checkSat) checkSat.checked = settings.sat;
-       if(checkSun) checkSun.checked = settings.sun;
-       
-       updateActiveDaysArray(settings.sat, settings.sun);
-   }
-   
-   function toggleWeekend() {
-       const showSat = document.getElementById('check-sat').checked;
-       const showSun = document.getElementById('check-sun').checked;
-       
-       localStorage.setItem('weekendSettings', JSON.stringify({ sat: showSat, sun: showSun }));
-       
-       updateActiveDaysArray(showSat, showSun);
-       renderGrid();       // Reconstruir columnas
-       loadScheduleState(); // Volver a poner las materias
-   }
-   
-   function updateActiveDaysArray(sat, sun) {
-       activeDays = [...BASE_DAYS];
-       if (sat) activeDays.push('Sábado');
-       if (sun) activeDays.push('Domingo');
-   }
-   
-   /* =========================================
-      RENDERIZADO DEL GRID (TABLA)
-      ========================================= */
-   
-   function renderGrid() {
-       const grid = document.getElementById('main-grid');
-       const headerRow = document.querySelector('.grid-header-row');
-       
-       grid.innerHTML = '';
-       headerRow.innerHTML = ''; 
-   
-       // 1. Definir columnas CSS dinámicamente según días activos
-       const columnsStyle = `90px repeat(${activeDays.length}, 1fr)`;
-       grid.style.gridTemplateColumns = columnsStyle;
-       headerRow.style.gridTemplateColumns = columnsStyle;
-   
-       // 2. Crear Headers
-       // A) Esquina
-       const corner = document.createElement('div');
-       corner.className = 'time-header-corner';
-       corner.innerHTML = 'Horas <i class="fas fa-pen" style="font-size:0.7em; opacity:0.5;"></i>';
-       headerRow.appendChild(corner);
-   
-       // B) Días
-       activeDays.forEach(dayName => {
-           const dh = document.createElement('div');
-           dh.className = 'day-header';
-           dh.textContent = dayName;
-           headerRow.appendChild(dh);
-       });
-   
-       // 3. Crear Filas (Horas + Celdas)
-       const savedSlots = JSON.parse(localStorage.getItem('timeSlots')) || DEFAULT_TIME_SLOTS;
-   
-       savedSlots.forEach((timeText, timeIndex) => {
-           // A) Columna de Hora (Editable)
-           const timeDiv = document.createElement('div');
-           timeDiv.className = 'time-slot-label';
-           timeDiv.textContent = timeText;
-           timeDiv.contentEditable = true; // Habilitar edición
-   
-           // Guardar al salir del foco
-           timeDiv.addEventListener('blur', () => {
-               savedSlots[timeIndex] = timeDiv.textContent;
-               localStorage.setItem('timeSlots', JSON.stringify(savedSlots));
-           });
-           // Prevenir Enter
-           timeDiv.addEventListener('keydown', (e) => { 
-               if (e.key === 'Enter') { e.preventDefault(); timeDiv.blur(); }
-           });
-   
-           grid.appendChild(timeDiv);
-   
-           // B) Celdas vacías para cada día activo
-           for (let dayIndex = 0; dayIndex < activeDays.length; dayIndex++) {
-               const cell = document.createElement('div');
-               cell.className = 'schedule-cell';
-               // ID ÚNICO: Fila-Columna (ej: cell-0-5 es la primera hora del 6to día)
-               cell.id = `cell-${timeIndex}-${dayIndex}`; 
-               
-               // Eventos Drag & Drop
-               cell.ondragover = (e) => allowDrop(e);
-               cell.ondrop = (e) => drop(e);
-               cell.ondragleave = (e) => e.target.classList.remove('drag-over');
-               cell.ondblclick = () => clearCell(cell.id);
-   
-               grid.appendChild(cell);
-           }
-       });
-   }
-   
-   /* =========================================
-      DRAG & DROP LOGIC
-      ========================================= */
-   
-   // Crear materia en la barra lateral
-   function createDraggableSubject(name = null, color = null) {
-       const inputName = document.getElementById('new-subject-name');
-       const inputColor = document.getElementById('subject-color');
-       
-       const txt = name || inputName.value;
-       const bg = color || inputColor.value;
-   
-       if (!txt) return; 
-   
-       const chip = document.createElement('div');
-       chip.className = 'subject-chip';
-       chip.draggable = true;
-       chip.textContent = txt;
-       chip.style.backgroundColor = bg;
-       chip.id = `subj-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`; 
-       
-       // Configurar Drag Start
-       chip.ondragstart = (e) => {
-           e.dataTransfer.setData("text/plain", JSON.stringify({
-               text: txt, 
-               color: bg, 
-               sourceId: chip.id, 
-               origin: 'palette' // Viene de la paleta
-           }));
-       };
-   
-       if (!name) { // Es nuevo input
-           saveSubjectPalette({ text: txt, color: bg });
-           document.getElementById('draggable-container').appendChild(chip);
-           inputName.value = '';
-       } else {
-           return chip; // Solo retornamos el elemento para cargarlo
-       }
-   }
-   
-   // Soltar en la rejilla
-   function drop(e) {
-       e.preventDefault();
-       cleanVisualArtifacts();
-       // Encontrar la celda correcta (padre)
-       let targetCell = e.target.closest('.schedule-cell');
-       
-       if (targetCell) {
-           targetCell.classList.remove('drag-over');
-           
-           const rawData = e.dataTransfer.getData("text/plain");
-           if (!rawData) return;
-           const data = JSON.parse(rawData);
-   
-           // Si movemos dentro del grid, borrar el origen anterior
-           if (data.origin === 'grid' && data.sourceId !== targetCell.id) {
-               clearCell(data.sourceId);
-           }
-   
-           // Renderizar el chip DENTRO de la celda
-           targetCell.innerHTML = '';
-           const newChip = document.createElement('div');
-           newChip.className = 'subject-chip';
-           newChip.style.backgroundColor = data.color;
-           newChip.textContent = data.text;
-           newChip.draggable = true;
-           
-           // Al arrastrar DESDE el grid
-           newChip.ondragstart = (ev) => {
-                ev.dataTransfer.setData("text/plain", JSON.stringify({
-                   text: data.text, 
-                   color: data.color, 
-                   sourceId: targetCell.id, // El ID de origen es la celda
-                   origin: 'grid' 
-               }));
-           };
-           
-           targetCell.appendChild(newChip);
-           saveScheduleState(targetCell.id, data);
-       }
-   }
-   
-   function removeSubjectFromGrid(subjectName) {
-    let schedule = JSON.parse(localStorage.getItem('scheduleGrid')) || {};
-    let hasChanges = false;
+// Actualizar cada segundo
+setInterval(updateClock, 1000);
 
-    // Buscamos en todas las celdas guardadas
-    for (const [cellId, data] of Object.entries(schedule)) {
-        if (data.text === subjectName) {
-            // Si coincide el nombre, borramos la celda visualmente
-            const cell = document.getElementById(cellId);
-            if (cell) cell.innerHTML = '';
+
+// --- LÓGICA DEL HORARIO (DRAG & DROP) ---
+let draggedItem = null;
+const coloresPastel = ['#E6868E', '#AFA975', '#EABFBD', '#847B54', '#D4A5A5', '#9BA4B5'];
+let colorIndex = 0;
+
+function createDraggableSubject() {
+    const input = document.getElementById('new-subject-name');
+    const colorInput = document.getElementById('new-subject-color');
+    
+    const name = input.value.trim();
+    const chosenColor = colorInput ? colorInput.value : '#E6868E'; // Toma el color seleccionado
+    
+    if (name !== '') {
+        const chip = document.createElement('div');
+        chip.className = 'subject-chip';
+        chip.draggable = true;
+        chip.textContent = name;
+        
+        // Aplica el color exacto que eligió el usuario en la ruleta
+        chip.style.backgroundColor = chosenColor;
+
+        // Eventos Drag
+        chip.addEventListener('dragstart', handleDragStart);
+        chip.addEventListener('dragend', handleDragEnd);
+
+        document.getElementById('draggable-container').appendChild(chip);
+        input.value = ''; // Limpia el nombre
+    }
+}
+
+// Generar celdas de la cuadrícula
+function generateGrid() {
+    const grid = document.getElementById('main-grid');
+    grid.innerHTML = ''; // Limpiar
+    
+    const horas = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'];
+    const dias = ['lun', 'mar', 'mie', 'jue', 'vie', 'sat', 'sun'];
+
+    horas.forEach(hora => {
+        // Etiqueta de hora
+        const timeLabel = document.createElement('div');
+        timeLabel.className = 'time-slot-label';
+        timeLabel.textContent = hora;
+        grid.appendChild(timeLabel);
+
+        // Crear celdas de los días
+        dias.forEach(dia => {
+            const cell = document.createElement('div');
+            cell.className = `schedule-cell ${dia}-col`;
             
-            // Y la marcamos para borrar de la memoria
-            delete schedule[cellId];
-            hasChanges = true;
+            // Ocultar findes por defecto
+            if(dia === 'sat' || dia === 'sun') {
+                cell.classList.add('hidden');
+            }
+
+            // Eventos Drop
+            cell.addEventListener('dragover', allowDrop);
+            cell.addEventListener('dragleave', handleDragLeave);
+            cell.addEventListener('drop', handleDrop);
+            
+            grid.appendChild(cell);
+        });
+    });
+}
+
+function handleDragStart(e) {
+    draggedItem = this;
+    this.classList.add('dragging');
+}
+
+function handleDragEnd() {
+    setTimeout(() => this.style.opacity = '1', 0);
+    draggedItem = null;
+    
+    // Limpiar estilos de arrastre
+    document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+}
+
+function allowDrop(e) {
+    e.preventDefault();
+    if(this.classList.contains('schedule-cell') && !this.hasChildNodes()) {
+        this.classList.add('drag-over');
+    }
+    if(this.id === 'trash') {
+        this.classList.add('drag-over');
+    }
+}
+
+function handleDragLeave(e) {
+    this.classList.remove('drag-over');
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    this.classList.remove('drag-over');
+    
+    // Si la celda está vacía, permite soltar
+    if(this.classList.contains('schedule-cell') && !this.hasChildNodes() && draggedItem) {
+        // Clonamos el elemento para dejar una copia en la paleta lateral si viene de ahí
+        if(draggedItem.parentNode.id === 'draggable-container') {
+            const clone = draggedItem.cloneNode(true);
+            clone.addEventListener('dragstart', handleDragStart);
+            clone.addEventListener('dragend', handleDragEnd);
+            this.appendChild(clone);
+        } else {
+            // Si viene de otra celda, solo lo movemos
+            this.appendChild(draggedItem);
         }
     }
-    if (hasChanges) {
-        localStorage.setItem('scheduleGrid', JSON.stringify(schedule));
-    }
 }
-    function cleanVisualArtifacts() {
-        document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
-        document.querySelector('.trash-zone').classList.remove('drag-over');
-    }
 
-   // Soltar en la basura
-   function deleteDroppedItem(e) {
+function deleteDroppedItem(e) {
     e.preventDefault();
-    cleanVisualArtifacts(); // Limpieza visual inmediata
-
-    const rawData = e.dataTransfer.getData("text/plain");
-    if (!rawData) return;
-    const data = JSON.parse(rawData);
-
-    // CASO 1: Viene del HORARIO (Grid) -> Solo borra esa celda
-    if (data.origin === 'grid') {
-        clearCell(data.sourceId); 
-    } 
-    // CASO 2: Viene de la PALETA (Lista) -> Borra de la lista Y del horario
-    else if (data.origin === 'palette') {
-        // 1. Borrar visualmente de la lista
-        const item = document.getElementById(data.sourceId);
-        if (item) item.remove(); 
-        
-        // 2. Borrar de la memoria de la paleta
-        removeFromPalette(data.text); 
-        
-        // 3. NUEVO: Buscar y destruir esa materia en el horario
-        removeSubjectFromGrid(data.text);
+    const trash = document.getElementById('trash');
+    if (trash) trash.classList.remove('drag-over');
+    
+    // Si hay un elemento siendo arrastrado, simplemente lo eliminamos
+    // (ya sea desde el panel de materias o desde el grid del horario)
+    if (draggedItem) {
+        draggedItem.remove();
+        draggedItem = null;
     }
 }
-   
-   function allowDrop(e) {
-       e.preventDefault();
-       const cell = e.target.closest('.schedule-cell');
-       const trash = e.target.closest('.trash-zone');
-       
-       if(cell) cell.classList.add('drag-over');
-       if(trash) trash.classList.add('drag-over');
-   }
-   
-   /* =========================================
-      PERSISTENCIA DE DATOS
-      ========================================= */
-   
-   // Limpiar una celda específica
-   function clearCell(cellId) {
-       const cell = document.getElementById(cellId);
-       if(cell) cell.innerHTML = '';
-       removeFromScheduleState(cellId);
-   }
-   
-   // A) Paleta Lateral
-   function saveSubjectPalette(obj) {
-       let p = JSON.parse(localStorage.getItem('palette')) || [];
-       p.push(obj);
-       localStorage.setItem('palette', JSON.stringify(p));
-   }
-   function loadSavedSubjects() {
-       let p = JSON.parse(localStorage.getItem('palette')) || [];
-       const container = document.getElementById('draggable-container');
-       container.innerHTML = '';
-       p.forEach(x => container.appendChild(createDraggableSubject(x.text, x.color)));
-   }
-   function removeFromPalette(txt) {
-       let p = JSON.parse(localStorage.getItem('palette')) || [];
-       p = p.filter(x => x.text !== txt);
-       localStorage.setItem('palette', JSON.stringify(p));
-   }
-   
-   // B) Estado del Horario
-   function saveScheduleState(id, data) {
-       let s = JSON.parse(localStorage.getItem('scheduleGrid')) || {};
-       s[id] = data;
-       localStorage.setItem('scheduleGrid', JSON.stringify(s));
-   }
-   function removeFromScheduleState(id) {
-       let s = JSON.parse(localStorage.getItem('scheduleGrid')) || {};
-       delete s[id];
-       localStorage.setItem('scheduleGrid', JSON.stringify(s));
-   }
-   function loadScheduleState() {
-       let s = JSON.parse(localStorage.getItem('scheduleGrid')) || {};
-       for (const [id, data] of Object.entries(s)) {
-           const cell = document.getElementById(id);
-           // Solo intentamos llenar si la celda existe (por si ocultamos sáb/dom)
-           if (cell) {
-               const chip = document.createElement('div');
-               chip.className = 'subject-chip';
-               chip.style.backgroundColor = data.color;
-               chip.textContent = data.text;
-               chip.draggable = true;
-               chip.ondragstart = (ev) => {
-                    ev.dataTransfer.setData("text/plain", JSON.stringify({
-                       text: data.text, color: data.color, sourceId: id, origin: 'grid'
-                   }));
-               };
-               cell.appendChild(chip);
-           }
-       }
-   }
-   
-   /* =========================================
-      GESTIÓN DE TAREAS
-      ========================================= */
-   
-   function addTask() {
-       const desc = document.getElementById('task-desc').value;
-       const date = document.getElementById('task-deadline').value;
-       if(!desc) return;
-       
-       let t = JSON.parse(localStorage.getItem('tasks')) || [];
-       t.push({ id: Date.now(), desc, date });
-       localStorage.setItem('tasks', JSON.stringify(t));
-       
-       loadTasks();
-       document.getElementById('task-desc').value = '';
-   }
-   
-   function loadTasks() {
-       const list = document.getElementById('task-list');
-       list.innerHTML = '';
-       let t = JSON.parse(localStorage.getItem('tasks')) || [];
-       
-       t.forEach(x => {
-           const li = document.createElement('li');
-           li.className = 'task-item';
-           const d = x.date ? new Date(x.date).toLocaleString() : '';
-           
-           li.innerHTML = `
-               <span>${x.desc} <small style="color:var(--text-muted); margin-left:10px">${d}</small></span> 
-               <button onclick="removeTask(${x.id})" style="color:var(--danger);border:none;background:none;cursor:pointer" title="Completar">
-                   <i class="fas fa-check"></i>
-               </button>
-           `;
-           list.appendChild(li);
-       });
-   }
-   
-   function removeTask(id) {
-       let t = JSON.parse(localStorage.getItem('tasks')) || [];
-       t = t.filter(x => x.id !== id);
-       localStorage.setItem('tasks', JSON.stringify(t));
-       loadTasks();
-   }
+
+// --- DÍAS VISIBLES (SÁBADO/DOMINGO) ---
+function toggleWeekend() {
+    const showSat = document.getElementById('check-sat').checked;
+    const showSun = document.getElementById('check-sun').checked;
+    
+    const gridHeader = document.getElementById('grid-header');
+    const mainGrid = document.getElementById('main-grid');
+    
+    // Clases en los contenedores CSS Grid
+    showSat ? gridHeader.classList.add('show-sat') : gridHeader.classList.remove('show-sat');
+    showSat ? mainGrid.classList.add('show-sat') : mainGrid.classList.remove('show-sat');
+    
+    showSun ? gridHeader.classList.add('show-sun') : gridHeader.classList.remove('show-sun');
+    showSun ? mainGrid.classList.add('show-sun') : mainGrid.classList.remove('show-sun');
+
+    // Mostrar/Ocultar Celdas específicas
+    document.querySelectorAll('.saturday-col, .sat-col').forEach(el => {
+        showSat ? el.classList.remove('hidden') : el.classList.add('hidden');
+    });
+    document.querySelectorAll('.sunday-col, .sun-col').forEach(el => {
+        showSun ? el.classList.remove('hidden') : el.classList.add('hidden');
+    });
+}
+
+
+// --- LÓGICA DE TAREAS ---
+function addTask() {
+    const descInput = document.getElementById('task-desc');
+    const dateInput = document.getElementById('task-deadline');
+    const desc = descInput.value.trim();
+    
+    if (desc !== '') {
+        const li = document.createElement('li');
+        li.className = 'task-item';
+        
+        let dateText = dateInput.value ? ` - 📅 ${dateInput.value}` : '';
+        
+        li.innerHTML = `
+            <span>${desc} ${dateText}</span>
+            <button onclick="this.parentElement.remove()" title="Eliminar"><i class="fas fa-check"></i></button>
+        `;
+        
+        document.getElementById('task-list').appendChild(li);
+        descInput.value = '';
+        dateInput.value = '';
+    }
+}
+
+// --- LÓGICA DE TIEMPO (POMODORO & CRONÓMETRO) ---
+let timerInterval = null;
+let currentMode = 'pomodoro'; // 'pomodoro', 'short', 'stopwatch'
+let secondsElapsed = 0; // Para el cronómetro
+let secondsLeft = 25 * 60; // Para la cuenta regresiva
+let isTimerRunning = false;
+
+function updateTimerDisplay() {
+    const display = document.getElementById('timer-display');
+    const totalSecs = (currentMode === 'stopwatch') ? secondsElapsed : secondsLeft;
+    
+    const mins = Math.floor(totalSecs / 60);
+    const secs = totalSecs % 60;
+    
+    if (display) {
+        display.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+}
+
+function setTimerMode(mode, minutes, button) {
+    clearInterval(timerInterval);
+    isTimerRunning = false;
+    currentMode = mode;
+    
+    const sublabel = document.getElementById('timer-sublabel');
+    
+    if (mode === 'stopwatch') {
+        secondsElapsed = 0;
+        if (sublabel) sublabel.textContent = "";
+    } else {
+        secondsLeft = minutes * 60;
+        if (sublabel) sublabel.textContent = mode === 'pomodoro' ? "" : "";
+    }
+    
+    updateTimerDisplay();
+    
+    // Cambiar estilos de las pestañas
+    document.querySelectorAll('.pomo-tab').forEach(tab => tab.classList.remove('active'));
+    if (button) button.classList.add('active');
+    
+    const startBtn = document.getElementById('start-timer-btn');
+    if (startBtn) startBtn.innerHTML = '<i class="fas fa-play"></i> Iniciar';
+}
+
+function toggleTimer() {
+    const startBtn = document.getElementById('start-timer-btn');
+    
+    if (isTimerRunning) {
+        // Pausar
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+        if (startBtn) startBtn.innerHTML = '<i class="fas fa-play"></i> Iniciar';
+    } else {
+        // Iniciar
+        isTimerRunning = true;
+        if (startBtn) startBtn.innerHTML = '<i class="fas fa-pause"></i> Pausa';
+        
+        timerInterval = setInterval(() => {
+            if (currentMode === 'stopwatch') {
+                secondsElapsed++;
+                updateTimerDisplay();
+            } else {
+                if (secondsLeft > 0) {
+                    secondsLeft--;
+                    updateTimerDisplay();
+                } else {
+                    clearInterval(timerInterval);
+                    isTimerRunning = false;
+                    alert("¡Tiempo finalizado! 🎉");
+                    if (startBtn) startBtn.innerHTML = '<i class="fas fa-play"></i> Iniciar';
+                }
+            }
+        }, 1000);
+    }
+}
+
+function resetTimer() {
+    clearInterval(timerInterval);
+    isTimerRunning = false;
+    
+    if (currentMode === 'stopwatch') {
+        secondsElapsed = 0;
+    } else {
+        secondsLeft = (currentMode === 'pomodoro' ? 25 : 5) * 60;
+    }
+    
+    updateTimerDisplay();
+    const startBtn = document.getElementById('start-timer-btn');
+    if (startBtn) startBtn.innerHTML = '<i class="fas fa-play"></i> Iniciar';
+}
+
+// --- ACTUALIZACIÓN DE HORA Y RELOJ ANALÓGICO ---
+function updateAnalogClock() {
+    const now = new Date();
+    const sec = now.getSeconds();
+    const min = now.getMinutes();
+    const hr = now.getHours();
+
+    const secHand = document.getElementById('sec-hand');
+    const minHand = document.getElementById('min-hand');
+    const hourHand = document.getElementById('hour-hand');
+
+    if (secHand && minHand && hourHand) {
+        // Rotaciones en grados de las manecillas
+        const secDeg = (sec / 60) * 360;
+        const minDeg = ((min + sec / 60) / 60) * 360;
+        const hrDeg = (((hr % 12) + min / 60) / 12) * 360;
+
+        secHand.style.transform = `rotate(${secDeg}deg)`;
+        minHand.style.transform = `rotate(${minDeg}deg)`;
+        hourHand.style.transform = `rotate(${hrDeg}deg)`;
+    }
+}
+setInterval(updateAnalogClock, 1000);
+
+// --- REPRODUCTOR DE MÚSICA LOFI REAL ---
+function toggleMusic() {
+    const audio = document.getElementById('lofi-audio');
+    const btn = document.getElementById('play-music-btn');
+    
+    if (audio.paused) {
+        audio.play();
+        btn.innerHTML = '<i class="fas fa-pause"></i>';
+    } else {
+        audio.pause();
+        btn.innerHTML = '<i class="fas fa-play"></i>';
+    }
+}
+
+// Objeto con las canciones/radios disponibles
+const playlist = {
+    'track-1': {
+        title: 'lofi hip hop radio',
+        artist: 'Lofi Girl',
+        src: 'https://stream.zeno.fm/f3wvbbqmdg8uv',
+        cover: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400'
+    },
+    'track-2': {
+        title: 'cozy lofi beats',
+        artist: 'ChilledCow',
+        src: 'https://stream.zeno.fm/330evyd4008uv',
+        cover: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=400'
+    },
+    'track-3': {
+        title: 'rainy day lofi',
+        artist: 'Lofi Girl',
+        src: 'https://stream.zeno.fm/433evyd4008uv',
+        cover: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=400'
+    }
+};
+
+function changeTrack(trackKey) {
+    const track = playlist[trackKey];
+    if (!track) return;
+
+    const audio = document.getElementById('lofi-audio');
+    const playBtn = document.getElementById('play-music-btn');
+    
+    // Cambiar datos en la pantalla
+    document.querySelector('.player-controls-area h3').textContent = track.title;
+    document.querySelector('.player-controls-area small').innerHTML = `${track.artist} <i class="fas fa-check-circle"></i>`;
+    document.querySelector('.album-art img').src = track.cover;
+    
+    // Cambiar fuente de audio y reproducir
+    audio.src = track.src;
+    audio.play();
+    if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+}
+
+function loadCustomUrl() {
+    const input = document.getElementById('song-url-input');
+    const url = input.value.trim();
+    const audioPlayer = document.getElementById('lofi-audio');
+    const titleEl = document.getElementById('player-title');
+    const subtitleEl = document.getElementById('player-subtitle');
+    const artistEl = document.getElementById('player-artist');
+    const statusBadge = document.getElementById('player-status-badge');
+
+    if (!url) {
+        alert("Por favor pega una URL válida.");
+        return;
+    }
+
+    // Detectar si el usuario pegó un enlace de YouTube
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+        let videoId = '';
+        if (url.includes('youtu.be/')) {
+            videoId = url.split('youtu.be/')[1].split('?')[0];
+        } else if (url.includes('watch?v=')) {
+            videoId = url.split('watch?v=')[1].split('&')[0];
+        }
+
+        if (videoId) {
+            // Reemplazar la vista del reproductor con el embed oficial de YouTube
+            const playerMain = document.querySelector('.player-main-content');
+            playerMain.innerHTML = `
+                <iframe width="100%" height="180" 
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen 
+                    style="border-radius: 12px;">
+                </iframe>
+            `;
+            if (audioPlayer) audioPlayer.pause();
+            return;
+        }
+    }
+
+    // Si es un archivo de audio normal (.mp3, .aac, radio stream)
+    if (audioPlayer) {
+        audioPlayer.src = url;
+        audioPlayer.play();
+        if (titleEl) titleEl.textContent = "Música Personalizada";
+        if (subtitleEl) subtitleEl.textContent = "Streaming directo";
+        if (artistEl) artistEl.innerHTML = 'Usuario <i class="fas fa-check-circle"></i>';
+        if (statusBadge) statusBadge.textContent = "En reproducción";
+    }
+}
+
+// Función auxiliar para seleccionar sugerencias rápidas
+function changeTrack(srcUrl, name, artist) {
+    const audio = document.getElementById('lofi-audio');
+    const title = document.getElementById('player-title');
+    const artistElem = document.getElementById('player-artist');
+    const playBtn = document.getElementById('play-music-btn');
+
+    audio.src = srcUrl;
+    audio.play();
+    
+    if (title) title.textContent = name;
+    if (artistElem) artistElem.innerHTML = `${artist} <i class="fas fa-check-circle"></i>`;
+    if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+}
